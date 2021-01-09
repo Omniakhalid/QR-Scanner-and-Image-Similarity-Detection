@@ -1,13 +1,9 @@
-package com.example.qr_scanner_and_image_similarity_detection;
+package com.example.qr_scanner_and_image_similarity_detection.fragments;
 
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,13 +12,20 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import com.example.qr_scanner_and_image_similarity_detection.FindOwner;
+import com.example.qr_scanner_and_image_similarity_detection.R;
+import com.example.qr_scanner_and_image_similarity_detection.Upload;
 
 import java.util.ArrayList;
 
-import static android.provider.MediaStore.*;
+import static android.provider.MediaStore.ACTION_IMAGE_CAPTURE;
 
-public class Upload extends Fragment {
+
+public class Upload_photo_Fragment extends Fragment {
 
     ImageView Item_img;
     Spinner Categories_spiner;
@@ -31,20 +34,9 @@ public class Upload extends Fragment {
 
     ArrayList<Bitmap> Images_lst = new ArrayList<>();
 
-    public Upload() {
-        // Required empty public constructor
-    }
-
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         Intent CameraIntent = new Intent(ACTION_IMAGE_CAPTURE);
         startActivityForResult(CameraIntent,1888);
 
@@ -64,7 +56,7 @@ public class Upload extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Intent intent = new Intent(getContext(),FindOwner.class);
+                Intent intent = new Intent(getContext(), FindOwner.class);
                 intent.putExtra("SelectedImage",Images_lst.get(position));
                 intent.putExtra("index",position);
                 startActivity(intent);
@@ -74,6 +66,7 @@ public class Upload extends Fragment {
 
         return view;
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

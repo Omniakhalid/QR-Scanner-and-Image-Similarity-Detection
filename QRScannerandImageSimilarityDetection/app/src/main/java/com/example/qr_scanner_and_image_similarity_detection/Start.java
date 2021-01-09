@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.qr_scanner_and_image_similarity_detection.fragments.Scan_Qr_Fragment;
+import com.example.qr_scanner_and_image_similarity_detection.fragments.Upload_photo_Fragment;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -30,7 +32,7 @@ public class Start extends AppCompatActivity {
                 Scan();
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                ScanQR scanQR = new ScanQR();
+                Scan_Qr_Fragment scanQR = new Scan_Qr_Fragment();
                 fragmentTransaction.replace(R.id.fragment_Container,scanQR);
                 fragmentTransaction.commit();
             }
@@ -42,7 +44,7 @@ public class Start extends AppCompatActivity {
             public void onClick(View v) {
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                Upload UploadFrag = new Upload();
+                Upload_photo_Fragment UploadFrag = new Upload_photo_Fragment();
                 fragmentTransaction.replace(R.id.fragment_Container,UploadFrag);
                 fragmentTransaction.commit();
             }
@@ -53,7 +55,7 @@ public class Start extends AppCompatActivity {
         IntentIntegrator integrator = new IntentIntegrator(Start.this);
         integrator.setOrientationLocked(true);
         integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
-        integrator.setPrompt("Scaning Code...");
+        integrator.setPrompt("Scanning Code...");
         integrator.setCameraId(0);
         integrator.setCaptureActivity(Capture.class);
         integrator.initiateScan();

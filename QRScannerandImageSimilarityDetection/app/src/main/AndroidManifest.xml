@@ -22,6 +22,16 @@
         <activity android:name=".SuccessActivity"/>
         <activity android:name=".verificationCodeActivity"/>
         <activity android:name=".FindOwner" />
+        <activity android:name=".activities.HomeActivity" android:theme="@style/Theme.WithActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activities.EmergencyActivity">
+
+        </activity>
         <activity
             android:name=".Capture"
             android:screenOrientation="fullSensor"
@@ -29,11 +39,7 @@
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".Start" />
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
