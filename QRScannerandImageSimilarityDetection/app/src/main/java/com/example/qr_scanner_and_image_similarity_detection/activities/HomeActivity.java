@@ -19,8 +19,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.qr_scanner_and_image_similarity_detection.Capture;
 import com.example.qr_scanner_and_image_similarity_detection.R;
-import com.example.qr_scanner_and_image_similarity_detection.Start;
-import com.example.qr_scanner_and_image_similarity_detection.Upload;
 import com.example.qr_scanner_and_image_similarity_detection.fragments.History_of_Movement_Fragment;
 import com.example.qr_scanner_and_image_similarity_detection.fragments.HomeFragment;
 import com.example.qr_scanner_and_image_similarity_detection.fragments.Reminder_Item_Fragment;
@@ -54,7 +52,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-
         HomeFragment homeFragment = new HomeFragment();
         openFragment(homeFragment);
 
@@ -83,9 +80,8 @@ public class HomeActivity extends AppCompatActivity {
                 break;
             case R.id.nav_scan_QR:
                 Scan();
-                Scan_Qr_Fragment scan_qr_fragment = new Scan_Qr_Fragment();
-                openFragment(scan_qr_fragment);
-                //openActivity(EmergencyActivity.class);
+                //Scan_Qr_Fragment scan_qr_fragment = new Scan_Qr_Fragment();
+                //openFragment(scan_qr_fragment);
                 break;
             case R.id.nav_upload:
                 Upload_photo_Fragment upload_photo_fragment = new Upload_photo_Fragment();
@@ -107,6 +103,26 @@ public class HomeActivity extends AppCompatActivity {
         integrator.setCameraId(0);
         integrator.setCaptureActivity(Capture.class);
         integrator.initiateScan();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (result != null) {
+            if (result.getContents() == null) {
+                //scan have an error
+                Toast.makeText(HomeActivity.this, "Cancelled", Toast.LENGTH_SHORT).show();
+            } else {
+                //scan is successful
+                Toast.makeText(HomeActivity.this, "Successful", Toast.LENGTH_SHORT).show();
+                //send QR data to emergency call activity..
+                openActivity(EmergencyActivity.class);
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     private void OpenNavDrawer() {
@@ -135,26 +151,6 @@ public class HomeActivity extends AppCompatActivity {
         transaction.addToBackStack(null);
         transaction.commit();
 
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if (result != null) {
-            if (result.getContents() == null) {
-                //scan have an error
-                Toast.makeText(HomeActivity.this, "Cancelled", Toast.LENGTH_SHORT).show();
-            } else {
-                //scan is successful
-                Toast.makeText(HomeActivity.this, "Successful", Toast.LENGTH_SHORT).show();
-                openActivity(EmergencyActivity.class);
-                //send QR data to emergency call activity..
-            }
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
     }
 
     @Override

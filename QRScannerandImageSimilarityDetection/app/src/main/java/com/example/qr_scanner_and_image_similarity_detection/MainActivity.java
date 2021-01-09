@@ -39,8 +39,6 @@ public class MainActivity extends AppCompatActivity {
                     ActivityOptions options=ActivityOptions.makeSceneTransitionAnimation(MainActivity.this,pairs);
                     startActivity(login,options.toBundle());
                 }
-
-
             }
         },splash_time);
     }

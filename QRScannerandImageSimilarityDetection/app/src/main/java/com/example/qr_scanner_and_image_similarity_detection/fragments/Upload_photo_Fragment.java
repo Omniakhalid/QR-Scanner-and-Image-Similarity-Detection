@@ -18,7 +18,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.qr_scanner_and_image_similarity_detection.FindOwner;
 import com.example.qr_scanner_and_image_similarity_detection.R;
-import com.example.qr_scanner_and_image_similarity_detection.Upload;
 
 import java.util.ArrayList;
 
@@ -55,7 +54,6 @@ public class Upload_photo_Fragment extends Fragment {
         Mylist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
                 Intent intent = new Intent(getContext(), FindOwner.class);
                 intent.putExtra("SelectedImage",Images_lst.get(position));
                 intent.putExtra("index",position);
