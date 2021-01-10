@@ -38,12 +38,12 @@ public class Myitems extends AppCompatActivity {
         itmImag =findViewById(R.id.Itm_itemimg);
 
 
-        ArrayList<CardExample> productList =new ArrayList<>();
+        ArrayList<ItemCardClass> ItemList =new ArrayList<>();
 
 
         MyRecyclerView =findViewById(R.id.Recclarvie);
         myResLaoutMan=new LinearLayoutManager(this);
-        myResAdapter=new RecycleAdapter(productList);
+        myResAdapter=new com.example.qr_scanner_and_image_similarity_detection.MyItemAdapter(ItemList);
         MyRecyclerView.setLayoutManager(myResLaoutMan);
         MyRecyclerView.setAdapter(myResAdapter);
 
@@ -52,7 +52,7 @@ public class Myitems extends AppCompatActivity {
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                productList.add(new CardExample(decre.getText().toString(),"Category is : "+ cateSpin.getSelectedItem().toString(), bitmap));
+                ItemList.add(new ItemCardClass(decre.getText().toString(),"Category is : "+ cateSpin.getSelectedItem().toString(), bitmap));
                 myResAdapter.notifyDataSetChanged();
             }
         });
