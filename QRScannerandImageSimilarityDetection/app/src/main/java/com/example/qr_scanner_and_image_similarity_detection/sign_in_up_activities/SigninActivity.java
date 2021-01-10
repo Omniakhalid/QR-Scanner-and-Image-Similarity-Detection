@@ -1,4 +1,4 @@
-package com.example.qr_scanner_and_image_similarity_detection;
+package com.example.qr_scanner_and_image_similarity_detection.sign_in_up_activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,14 +10,14 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
-
+import com.example.qr_scanner_and_image_similarity_detection.R;
+import com.example.qr_scanner_and_image_similarity_detection.activities.HomeActivity;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class SigninActivity extends AppCompatActivity {
     TextInputLayout email,pass;
     ImageView image;
-    Button sign,forgotten_pass;
+    Button signup,forgotten_pass,sign_in;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,10 +27,19 @@ public class SigninActivity extends AppCompatActivity {
         email =findViewById(R.id.sig_Email_editTxt);
         pass =findViewById(R.id.sig_password_editTxt);
         image =(ImageView)findViewById(R.id.logoImage);
-        sign=(Button)findViewById(R.id.sig_join_btn);
+        signup=(Button)findViewById(R.id.sig_join_btn);
+        sign_in=(Button)findViewById(R.id.sig_signIn_btn);
         forgotten_pass=(Button)findViewById(R.id.sig_forget_pass_btn);
 
-        sign.setOnClickListener(new View.OnClickListener() {
+        sign_in.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sign_in_intent = new Intent(SigninActivity.this, HomeActivity.class);
+                startActivity(sign_in_intent);
+            }
+        });
+
+        signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent sign_up = new Intent(SigninActivity.this,SignupActivity.class);
@@ -38,7 +47,7 @@ public class SigninActivity extends AppCompatActivity {
                 pairs[0]=new Pair<View,String>(image,"logo_image");
                 pairs[1]=new Pair<View,String>(email,"trans_email");
                 pairs[2]=new Pair<View,String>(pass,"trans_password");
-                pairs[3]=new Pair<View,String>(sign,"trans_sign_btn");
+                pairs[3]=new Pair<View,String>(signup,"trans_sign_btn");
                 pairs[4]=new Pair<View,String>(forgotten_pass,"trans_forget_btn");
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
                     ActivityOptions options=ActivityOptions.makeSceneTransitionAnimation(SigninActivity.this,pairs);
@@ -56,7 +65,7 @@ public class SigninActivity extends AppCompatActivity {
                 pairs[0]=new Pair<View,String>(image,"logo_image");
                 pairs[1]=new Pair<View,String>(email,"trans_email");
                 pairs[2]=new Pair<View,String>(pass,"trans_password");
-                pairs[3]=new Pair<View,String>(sign,"trans_sign_btn");
+                pairs[3]=new Pair<View,String>(signup,"trans_sign_btn");
                 pairs[4]=new Pair<View,String>(forgotten_pass,"trans_forget_btn");
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
                     ActivityOptions options=ActivityOptions.makeSceneTransitionAnimation(SigninActivity.this,pairs);

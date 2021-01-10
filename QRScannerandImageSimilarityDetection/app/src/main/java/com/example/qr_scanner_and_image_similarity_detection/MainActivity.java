@@ -14,6 +14,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.qr_scanner_and_image_similarity_detection.sign_in_up_activities.SigninActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     private static int splash_time=4000;
@@ -32,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent login=new Intent(MainActivity.this,SigninActivity.class);
+                Intent login=new Intent(MainActivity.this, SigninActivity.class);
                 Pair[] pairs=new Pair[1];
                 pairs[0]=new Pair<View,String>(image,"logo_image");
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {

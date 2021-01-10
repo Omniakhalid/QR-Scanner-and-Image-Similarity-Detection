@@ -8,7 +8,7 @@
     android:background="#fff"
     android:padding="20dp"
     android:orientation="vertical"
-    tools:context=".SigninActivity">
+    tools:context=".sign_in_up_activities.SigninActivity">
 
     <ImageView
         android:id="@+id/logoImage"
