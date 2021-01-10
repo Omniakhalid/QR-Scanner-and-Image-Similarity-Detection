@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.qr_scanner_and_image_similarity_detection.MessageChatAdapter;
+import com.example.qr_scanner_and_image_similarity_detection.adapters.MessageChatAdapter;
 import com.example.qr_scanner_and_image_similarity_detection.R;
 import com.example.qr_scanner_and_image_similarity_detection.models.MessageChatModel;
 

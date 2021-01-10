@@ -2,11 +2,11 @@ package com.example.qr_scanner_and_image_similarity_detection;
 
 import android.graphics.Bitmap;
 
-public class CardExample {
+public class ItemCardClass {
     private String Discreaption;
     private String mCategory;
     private Bitmap Save;
-    public CardExample(String text1, String text2,Bitmap imageResource){
+    public ItemCardClass(String text1, String text2, Bitmap imageResource){
         Discreaption=text1;
         mCategory=text2;
         Save=imageResource;

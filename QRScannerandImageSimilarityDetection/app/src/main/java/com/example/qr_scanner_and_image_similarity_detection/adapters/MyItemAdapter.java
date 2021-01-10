@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ExampleViewHolder> {
-    private ArrayList<CardExample> myExampleList;
+public class MyItemAdapter extends RecyclerView.Adapter<MyItemAdapter.ExampleViewHolder> {
+    private ArrayList<ItemCardClass> myExampleList;
 
     @NonNull
     @Override
@@ -21,13 +21,13 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ExampleV
         ExampleViewHolder evh=new ExampleViewHolder(v);
         return evh;
     }
-    public RecycleAdapter(ArrayList<CardExample>exampleList){
+    public MyItemAdapter(ArrayList<ItemCardClass>exampleList){
         myExampleList=exampleList;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ExampleViewHolder holder, int position) {
-        CardExample currenProd =myExampleList.get(position);
+        ItemCardClass currenProd =myExampleList.get(position);
         holder.myTextDisceaption.setText(currenProd.getMyText1());
         holder.myTextCategory.setText(currenProd.getMyText2());
         holder.Savebtn.setImageBitmap(currenProd.getmImageResource());

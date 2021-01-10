@@ -1,6 +1,5 @@
 package com.example.qr_scanner_and_image_similarity_detection;
 
-import com.example.qr_scanner_and_image_similarity_detection.adapters.*;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,12 +38,12 @@ public class Myitems extends AppCompatActivity {
         itmImag =findViewById(R.id.Itm_itemimg);
 
 
-        ArrayList<CardExample> ItemList =new ArrayList<>();
+        ArrayList<ItemCardClass> ItemList =new ArrayList<>();
 
 
         MyRecyclerView =findViewById(R.id.Recclarvie);
         myResLaoutMan=new LinearLayoutManager(this);
-        myResAdapter=new MyItemAdapter(ItemList);
+        myResAdapter=new com.example.qr_scanner_and_image_similarity_detection.MyItemAdapter(ItemList);
         MyRecyclerView.setLayoutManager(myResLaoutMan);
         MyRecyclerView.setAdapter(myResAdapter);
 
@@ -53,7 +52,7 @@ public class Myitems extends AppCompatActivity {
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ItemList.add(new CardExample(decre.getText().toString(),"Category is : "+ cateSpin.getSelectedItem().toString(), bitmap));
+                ItemList.add(new ItemCardClass(decre.getText().toString(),"Category is : "+ cateSpin.getSelectedItem().toString(), bitmap));
                 myResAdapter.notifyDataSetChanged();
             }
         });
