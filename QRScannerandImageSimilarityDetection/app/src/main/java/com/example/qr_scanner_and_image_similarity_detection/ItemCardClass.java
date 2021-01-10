@@ -3,24 +3,24 @@ package com.example.qr_scanner_and_image_similarity_detection;
 import android.graphics.Bitmap;
 
 public class CardExample {
-    private String myText1;
-    private String myText2;
-    private Bitmap mImageResource;
+    private String Discreaption;
+    private String mCategory;
+    private Bitmap Save;
     public CardExample(String text1, String text2,Bitmap imageResource){
-        myText1=text1;
-        myText2=text2;
-        mImageResource=imageResource;
+        Discreaption=text1;
+        mCategory=text2;
+        Save=imageResource;
     }
 
     public String getMyText1() {
-        return myText1;
+        return Discreaption;
     }
 
     public String getMyText2() {
-        return myText2;
+        return mCategory;
     }
 
     public Bitmap getmImageResource() {
-        return mImageResource;
+        return Save;
     }
 }

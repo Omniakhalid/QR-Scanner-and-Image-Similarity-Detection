@@ -28,9 +28,9 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ExampleV
     @Override
     public void onBindViewHolder(@NonNull ExampleViewHolder holder, int position) {
         CardExample currenProd =myExampleList.get(position);
-        holder.myTextView1.setText(currenProd.getMyText1());
-        holder.myTextView2.setText(currenProd.getMyText2());
-        holder.deletebtn.setImageBitmap(currenProd.getmImageResource());
+        holder.myTextDisceaption.setText(currenProd.getMyText1());
+        holder.myTextCategory.setText(currenProd.getMyText2());
+        holder.Savebtn.setImageBitmap(currenProd.getmImageResource());
 
     }
 
@@ -40,15 +40,15 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ExampleV
     }
 
     public class ExampleViewHolder extends RecyclerView.ViewHolder {
-        public TextView myTextView1;
-        public TextView myTextView2;
-        public ImageView deletebtn;
+        public TextView myTextDisceaption;
+        public TextView myTextCategory;
+        public ImageView Savebtn;
 
         public ExampleViewHolder(View itemView) {
             super(itemView);
-            myTextView1=itemView.findViewById(R.id.item_Descriptiontxt);
-            myTextView2=itemView.findViewById(R.id.Item_CategoryTxt);
-            deletebtn=itemView.findViewById(R.id.item_itenPoto);
+            myTextDisceaption=itemView.findViewById(R.id.item_Descriptiontxt);
+            myTextCategory=itemView.findViewById(R.id.Item_CategoryTxt);
+            Savebtn=itemView.findViewById(R.id.item_itenPoto);
 
 
         }
