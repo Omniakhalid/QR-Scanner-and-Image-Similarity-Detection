@@ -14,15 +14,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.QRScannerandImageSimilarityDetection">
-        <activity android:name=".sign_in_up_activities.verificationCodeActivity"/>
-        <activity android:name=".sign_in_up_activities.NewpassActivity"/>
-        <activity android:name=".sign_in_up_activities.ResetActivity"/>
-        <activity android:name=".sign_in_up_activities.SelectionActivity"/>
-        <activity android:name=".sign_in_up_activities.SigninActivity"/>
-        <activity android:name=".sign_in_up_activities.SignupActivity"/>
-        <activity android:name=".sign_in_up_activities.SuccessActivity"/>
+        <activity android:name=".SignupActivity"></activity>
+        <activity android:name=".SigninActivity"/>
+        <activity android:name=".SelectionActivity"/>
+        <activity android:name=".ResetActivity"/>
+        <activity android:name=".NewpassActivity"/>
+        <activity android:name=".SuccessActivity"/>
+        <activity android:name=".verificationCodeActivity"/>
         <activity android:name=".FindOwner" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.HomeActivity" android:theme="@style/Theme.WithActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,7 +37,8 @@
             android:screenOrientation="fullSensor"
             android:stateNotNeeded="true"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".activities.HomeActivity" android:theme="@style/Theme.WithActionBar">
+        <activity android:name=".Start" />
+        <activity android:name=".MainActivity">
 
         </activity>
     </application>

@@ -1,4 +1,4 @@
-package com.example.qr_scanner_and_image_similarity_detection;
+package com.example.qr_scanner_and_image_similarity_detection.adapters;
 
 import android.content.Context;
 import android.util.Log;
@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.qr_scanner_and_image_similarity_detection.R;
+import com.example.qr_scanner_and_image_similarity_detection.models.MessageChatModel;
 
 import java.util.List;
 

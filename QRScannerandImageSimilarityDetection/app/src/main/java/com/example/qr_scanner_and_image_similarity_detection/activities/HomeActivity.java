@@ -161,14 +161,16 @@ public class HomeActivity extends AppCompatActivity {
             return true;
         }
         if (id==R.id.menu_chat_icon){
-            showMassage("chat clicked");
+            showChat();
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    void showMassage(String s){
-        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+    void showChat(){
+
+        Intent intent = new Intent(this, ChatActivity.class);
+        startActivity(intent);
     }
 
 }

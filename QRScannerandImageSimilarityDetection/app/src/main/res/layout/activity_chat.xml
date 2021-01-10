@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     android:orientation="vertical"
-    tools:context=".ChatActivity">
+    tools:context=".activities.ChatActivity">
 
 
     <LinearLayout
@@ -26,6 +26,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/returntoHome"
                     android:layout_width="30dp"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
