@@ -37,7 +37,7 @@
             android:screenOrientation="fullSensor"
             android:stateNotNeeded="true"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".Start" />
+        <activity android:name=".activities.ChatActivity" />
         <activity android:name=".MainActivity">
 
         </activity>

@@ -1,5 +1,6 @@
 package com.example.qr_scanner_and_image_similarity_detection.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
@@ -12,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.qr_scanner_and_image_similarity_detection.MessageChatAdapter;
+import com.example.qr_scanner_and_image_similarity_detection.adapters.MessageChatAdapter;
 import com.example.qr_scanner_and_image_similarity_detection.R;
 import com.example.qr_scanner_and_image_similarity_detection.models.MessageChatModel;
 
@@ -168,7 +169,15 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
-
+      //return to home
+        ImageView returnHome=(ImageView)findViewById(R.id.returntoHome) ;
+        returnHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ChatActivity.this, HomeActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }
