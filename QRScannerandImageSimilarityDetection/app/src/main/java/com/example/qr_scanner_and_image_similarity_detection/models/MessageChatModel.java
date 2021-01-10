@@ -1,4 +1,4 @@
-package com.example.qr_scanner_and_image_similarity_detection;
+package com.example.qr_scanner_and_image_similarity_detection.models;
 
 public class MessageChatModel {
     private String text;
