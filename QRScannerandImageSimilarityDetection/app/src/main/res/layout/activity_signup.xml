@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".sign_in_up_activities.SignupActivity">
+    tools:context=".activities.sign_in_up_activities.SignupActivity">
     <ImageView
         android:id="@+id/sig_up_logoImage"
         android:layout_width="100dp"

@@ -10,35 +10,47 @@
     tools:context=".activities.EmergencyActivity">
 
     <Spinner
-        android:layout_marginTop="20dp"
-        android:layout_weight="0.2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <Spinner
-        android:layout_marginTop="5dp"
-        android:layout_weight="0.2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Message to the owner "
+        android:layout_marginTop="20dp"
+        android:layout_weight="0.2"
+        android:background="@color/colorPrimary"
+        android:entries="@array/Emergency_type"
+        android:popupBackground="@color/colorPrimary"
+        android:spinnerMode="dropdown"
+        android:theme="@style/spinnerTheme" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_weight="0.2"
+        android:background="@color/colorPrimary"
+        android:entries="@array/Categories"
+        android:popupBackground="@color/colorPrimary"
+        android:spinnerMode="dropdown"
+        android:theme="@style/spinnerTheme" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:layout_weight="0.2"
         android:gravity="center_vertical"
+        android:text="Message to the owner "
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="27sp"
         android:textStyle="bold" />
 
     <EditText
-        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:layout_weight="3"
         android:gravity="start"
         android:hint="write message here "
-         />
+        android:textColor="@color/colorPrimary"
+        android:textColorHint="@color/colorPrimary" />
 
     <Button
         android:layout_width="135dp"

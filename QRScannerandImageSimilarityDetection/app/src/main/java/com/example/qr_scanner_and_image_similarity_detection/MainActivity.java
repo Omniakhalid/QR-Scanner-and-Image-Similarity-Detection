@@ -14,7 +14,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.qr_scanner_and_image_similarity_detection.sign_in_up_activities.SigninActivity;
+import com.example.qr_scanner_and_image_similarity_detection.activities.sign_in_up_activities.SigninActivity;
 
 public class MainActivity extends AppCompatActivity {
 

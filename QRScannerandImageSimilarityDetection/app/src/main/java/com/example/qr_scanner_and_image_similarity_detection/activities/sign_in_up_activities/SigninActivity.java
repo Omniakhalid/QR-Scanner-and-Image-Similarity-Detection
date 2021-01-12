@@ -1,4 +1,4 @@
-package com.example.qr_scanner_and_image_similarity_detection.sign_in_up_activities;
+package com.example.qr_scanner_and_image_similarity_detection.activities.sign_in_up_activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 

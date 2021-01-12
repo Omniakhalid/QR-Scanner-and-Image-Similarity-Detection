@@ -9,8 +9,6 @@
     android:animateLayoutChanges="true"
     tools:context=".activities.HomeActivity">
 
-
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -39,7 +37,10 @@
         android:layout_height="match_parent"
         android:id="@+id/navigation"
         android:layout_gravity="start"
-        app:menu="@menu/nav_navdrawermenu">
+        app:menu="@menu/nav_navdrawermenu"
+        app:itemTextColor="@color/colorPrimaryDark"
+        app:itemIconTint="@color/colorPrimary"
+        app:itemIconSize="35dp">
     </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>

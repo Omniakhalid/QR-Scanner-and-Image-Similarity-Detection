@@ -1,4 +1,4 @@
-package com.example.qr_scanner_and_image_similarity_detection;
+package com.example.qr_scanner_and_image_similarity_detection.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,6 +13,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+
+import com.example.qr_scanner_and_image_similarity_detection.ItemCardClass;
+import com.example.qr_scanner_and_image_similarity_detection.R;
+
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;

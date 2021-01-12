@@ -35,7 +35,7 @@
             android:layout_marginStart="112dp"
             android:layout_marginTop="17dp"
             android:gravity="center"
-            android:textColor="#8F8F8F"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="18sp" />
 
         <TextView
@@ -47,7 +47,7 @@
             android:layout_marginStart="115dp"
             android:layout_marginTop="42dp"
             android:gravity="center"
-            android:textColor="#C0C0C0"
+            android:textColor="@color/colorPrimary"
             android:textSize="12sp" />
 
         <TextView
@@ -59,7 +59,7 @@
             android:layout_marginStart="121dp"
             android:layout_marginTop="93dp"
             android:gravity="center"
-            android:textColor="#C0C0C0"
+            android:textColor="@color/colorPrimary"
             android:textSize="12sp" />
 
         <TextView
@@ -71,7 +71,7 @@
             android:layout_marginStart="174dp"
             android:layout_marginTop="93dp"
             android:gravity="center"
-            android:textColor="#C0C0C0"
+            android:textColor="@color/colorPrimary"
             android:textSize="12sp" />
 
     </RelativeLayout>

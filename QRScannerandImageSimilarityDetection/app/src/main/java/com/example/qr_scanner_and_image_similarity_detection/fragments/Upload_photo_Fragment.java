@@ -39,7 +39,7 @@ public class Upload_photo_Fragment extends Fragment {
         Intent CameraIntent = new Intent(ACTION_IMAGE_CAPTURE);
         startActivityForResult(CameraIntent,1888);
 
-        View view = inflater.inflate(R.layout.fragment_upload, container, false);
+        View view = inflater.inflate(R.layout.fragment_upload_photo_, container, false);
         Item_img = view.findViewById(R.id.uploadfrag_ItmImg);
         Categories_spiner = view.findViewById(R.id.UploadFrag_Categ_spinner);
 

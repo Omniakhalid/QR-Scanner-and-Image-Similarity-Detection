@@ -5,25 +5,25 @@
         android:id="@+id/nav_home"
         android:icon="@drawable/ic_home"
         android:title="Home"
-        app:cnb_iconColor="@color/purple_200"/>
+        app:cnb_iconColor="@color/colorPrimary"/>
     <item
         android:id="@+id/nav_history"
         android:icon="@drawable/ic_history"
         android:title="History of Movement"
-        app:cnb_iconColor="@color/purple_200"/>
+        app:cnb_iconColor="@color/colorPrimary"/>
     <item
         android:id="@+id/nav_scan_QR"
         android:icon="@drawable/ic_qr_scanner"
         android:title="Scan QR"
-        app:cnb_iconColor="@color/purple_200" />
+        app:cnb_iconColor="@color/colorPrimary" />
     <item
         android:id="@+id/nav_reminder"
         android:icon="@drawable/ic_reminder"
         android:title="Reminder"
-        app:cnb_iconColor="@color/purple_200" />
+        app:cnb_iconColor="@color/colorPrimary" />
     <item
         android:id="@+id/nav_upload"
         android:icon="@drawable/ic_photo"
         android:title="Upload Photo"
-        app:cnb_iconColor="@color/purple_200" />
+        app:cnb_iconColor="@color/colorPrimary" />
 </menu>

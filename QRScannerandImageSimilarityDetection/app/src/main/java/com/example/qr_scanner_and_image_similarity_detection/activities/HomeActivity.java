@@ -19,7 +19,9 @@ import androidx.fragment.app.FragmentTransaction;
 
 
 import com.example.qr_scanner_and_image_similarity_detection.Capture;
+import com.example.qr_scanner_and_image_similarity_detection.activities.Myitems;
 import com.example.qr_scanner_and_image_similarity_detection.R;
+import com.example.qr_scanner_and_image_similarity_detection.activities.sign_in_up_activities.SigninActivity;
 import com.example.qr_scanner_and_image_similarity_detection.fragments.History_of_Movement_Fragment;
 import com.example.qr_scanner_and_image_similarity_detection.fragments.HomeFragment;
 import com.example.qr_scanner_and_image_similarity_detection.fragments.Reminder_Item_Fragment;
@@ -101,7 +103,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private void Scan() {
         IntentIntegrator integrator = new IntentIntegrator(HomeActivity.this);
         integrator.setOrientationLocked(true);
-        integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
+        integrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
         integrator.setPrompt("Scanning Code...");
         integrator.setCameraId(0);
         integrator.setCaptureActivity(Capture.class);
@@ -179,6 +181,24 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.nav_drawer_profile:
+                openActivity(ProfileActivity.class);
+                break;
+            case R.id.nav_drawer_logout:
+                finish();
+                openActivity(SigninActivity.class);
+                break;
+            case R.id.nav_drawer_my_item:
+                openActivity(Myitems.class);
+                break;
+            case R.id.nav_drawer_tracking:
+                Toast.makeText(this, "Tracking Enabled", Toast.LENGTH_SHORT).show();
+                break;
+
+        }
+
         showMessage();
         drawerLayout.closeDrawer(GravityCompat.START,true);
         return false;

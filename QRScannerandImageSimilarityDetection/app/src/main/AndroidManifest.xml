@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.qr_scanner_and_image_similarity_detection">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -14,16 +13,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.QRScannerandImageSimilarityDetection">
-        <activity android:name=".SignupActivity"></activity>
-        <activity android:name=".SigninActivity"/>
-        <activity android:name=".SelectionActivity"/>
-        <activity android:name=".ResetActivity"/>
-        <activity android:name=".NewpassActivity"/>
-        <activity android:name=".SuccessActivity"/>
-        <activity android:name=".verificationCodeActivity"/>
-        <activity android:name=".activities.ChatActivity"/>
+
+        <activity android:name=".activities.sign_in_up_activities.SignupActivity"></activity>
+        <activity android:name=".activities.sign_in_up_activities.SigninActivity" />
+        <activity android:name=".activities.sign_in_up_activities.SelectionActivity" />
+        <activity android:name=".activities.sign_in_up_activities.ResetActivity" />
+        <activity android:name=".activities.sign_in_up_activities.NewpassActivity" />
+        <activity android:name=".activities.sign_in_up_activities.SuccessActivity" />
+        <activity android:name=".activities.sign_in_up_activities.verificationCodeActivity" />
+
+        <activity android:name=".activities.ChatActivity" />
+        <activity android:name=".activities.ProfileActivity" />
+        <activity android:name=".activities.Myitems" />
         <activity android:name=".FindOwner" />
-        <activity android:name=".activities.HomeActivity" android:theme="@style/Theme.WithActionBar">
+        <activity
+            android:name=".activities.HomeActivity"
+            android:theme="@style/Theme.WithActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,7 +43,6 @@
             android:screenOrientation="fullSensor"
             android:stateNotNeeded="true"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".Start" />
         <activity android:name=".MainActivity">
 
         </activity>

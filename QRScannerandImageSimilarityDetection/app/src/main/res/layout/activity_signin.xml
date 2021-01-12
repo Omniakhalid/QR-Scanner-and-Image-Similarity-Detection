@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:background="#fff"
+    android:background="#f0f0f0"
     android:padding="20dp"
     android:orientation="vertical"
-    tools:context=".sign_in_up_activities.SigninActivity">
+    tools:context=".activities.sign_in_up_activities.SigninActivity">
 
     <ImageView
         android:id="@+id/logoImage"
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:hint="E-mail"
-            app:boxStrokeColor="#000"
+            app:boxStrokeColor="#345DA7"
             android:transitionName="trans_email">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -46,7 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
-            app:boxStrokeColor="#000"
+            app:boxStrokeColor="#345DA7"
             app:passwordToggleEnabled="true"
             android:transitionName="trans_password">
 
@@ -67,7 +67,7 @@
             android:elevation="0dp"
             android:textAlignment="textEnd"
             android:text="Forget Password?"
-            android:textColor="#000"
+            android:textColor="#3b8ac4"
             android:transitionName="trans_forget_btn"
             tools:ignore="RtlCompat" />
 

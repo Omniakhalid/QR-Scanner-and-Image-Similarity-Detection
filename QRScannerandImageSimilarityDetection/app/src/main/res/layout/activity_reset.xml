@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".sign_in_up_activities.ResetActivity"
+    tools:context=".activities.sign_in_up_activities.ResetActivity"
     android:padding="30dp">
     <LinearLayout
         android:layout_width="match_parent"
