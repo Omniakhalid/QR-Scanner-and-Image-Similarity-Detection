@@ -21,6 +21,7 @@
         <activity android:name=".NewpassActivity"/>
         <activity android:name=".SuccessActivity"/>
         <activity android:name=".verificationCodeActivity"/>
+        <activity android:name=".activities.ChatActivity"/>
         <activity android:name=".FindOwner" />
         <activity android:name=".activities.HomeActivity" android:theme="@style/Theme.WithActionBar">
             <intent-filter>

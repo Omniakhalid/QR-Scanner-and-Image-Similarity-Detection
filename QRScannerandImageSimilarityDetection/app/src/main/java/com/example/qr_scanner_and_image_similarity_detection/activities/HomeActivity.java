@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -24,16 +25,18 @@ import com.example.qr_scanner_and_image_similarity_detection.fragments.HomeFragm
 import com.example.qr_scanner_and_image_similarity_detection.fragments.Reminder_Item_Fragment;
 import com.example.qr_scanner_and_image_similarity_detection.fragments.Scan_Qr_Fragment;
 import com.example.qr_scanner_and_image_similarity_detection.fragments.Upload_photo_Fragment;
+import com.google.android.material.navigation.NavigationView;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;
     private ChipNavigationBar bottom_navigationBar;
     private FragmentTransaction transaction;
+    private NavigationView nav_view;
 
 
     @Override
@@ -99,7 +102,7 @@ public class HomeActivity extends AppCompatActivity {
         IntentIntegrator integrator = new IntentIntegrator(HomeActivity.this);
         integrator.setOrientationLocked(true);
         integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
-        integrator.setPrompt("Scaning Code...");
+        integrator.setPrompt("Scanning Code...");
         integrator.setCameraId(0);
         integrator.setCaptureActivity(Capture.class);
         integrator.initiateScan();
@@ -126,7 +129,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void OpenNavDrawer() {
-        toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.close, R.string.open);
+        toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         ActionBar actionBar = this.getSupportActionBar();
@@ -138,10 +141,11 @@ public class HomeActivity extends AppCompatActivity {
     private void field_initialization() {
 
         drawerLayout = findViewById(R.id.nav_drawer);
+        nav_view = findViewById(R.id.navigation);
         bottom_navigationBar = findViewById(R.id.chipNavigation);
         transaction = getSupportFragmentManager().beginTransaction();
         bottom_navigationBar.setItemSelected(R.id.nav_home, true);
-
+        nav_view.setNavigationItemSelectedListener(this);
     }
 
     private void openFragment(final Fragment fragment) {
@@ -173,4 +177,14 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        showMessage();
+        drawerLayout.closeDrawer(GravityCompat.START,true);
+        return false;
+    }
+
+    private void showMessage() {
+        Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
+    }
 }

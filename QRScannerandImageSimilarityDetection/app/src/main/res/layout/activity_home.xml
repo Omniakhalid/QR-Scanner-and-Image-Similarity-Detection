@@ -6,16 +6,10 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:id="@+id/nav_drawer"
+    android:animateLayoutChanges="true"
     tools:context=".activities.HomeActivity">
 
 
-    <com.google.android.material.navigation.NavigationView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:id="@+id/navigation"
-        android:layout_gravity="start"
-        app:menu="@menu/nav_navdrawermenu">
-    </com.google.android.material.navigation.NavigationView>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -37,12 +31,15 @@
             android:layout_above="@id/chipNavigation" >
         </FrameLayout>
 
-        <com.google.android.material.navigation.NavigationView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="start|left"
-            app:menu="@menu/nav_navdrawermenu"
-            />
     </RelativeLayout>
+
+
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/navigation"
+        android:layout_gravity="start"
+        app:menu="@menu/nav_navdrawermenu">
+    </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>

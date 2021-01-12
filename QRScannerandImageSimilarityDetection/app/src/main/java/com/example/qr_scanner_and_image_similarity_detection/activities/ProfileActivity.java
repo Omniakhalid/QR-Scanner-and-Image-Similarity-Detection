@@ -1,4 +1,4 @@
-package com.example.qr_scanner_and_image_similarity_detection;
+package com.example.qr_scanner_and_image_similarity_detection.activities;
 
 import android.os.Bundle;
 import android.view.View;
@@ -6,6 +6,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.qr_scanner_and_image_similarity_detection.R;
 
 public class ProfileActivity extends AppCompatActivity {
 
