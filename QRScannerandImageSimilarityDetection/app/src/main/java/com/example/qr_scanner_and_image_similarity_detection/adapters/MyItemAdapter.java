@@ -1,4 +1,4 @@
-package com.example.qr_scanner_and_image_similarity_detection;
+package com.example.qr_scanner_and_image_similarity_detection.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +8,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.qr_scanner_and_image_similarity_detection.ItemCardClass;
+import com.example.qr_scanner_and_image_similarity_detection.R;
 
 import java.util.ArrayList;
 
@@ -28,9 +31,9 @@ public class MyItemAdapter extends RecyclerView.Adapter<MyItemAdapter.ExampleVie
     @Override
     public void onBindViewHolder(@NonNull ExampleViewHolder holder, int position) {
         ItemCardClass currenProd =myExampleList.get(position);
-        holder.myTextDisceaption.setText(currenProd.getMyText1());
-        holder.myTextCategory.setText(currenProd.getMyText2());
-        holder.Savebtn.setImageBitmap(currenProd.getmImageResource());
+        holder.myTextDisceaption.setText(currenProd.getDiscreaption());
+        holder.myTextCategory.setText(currenProd.getmCategory());
+        holder.Savebtn.setImageBitmap(currenProd.getImageSource());
 
     }
 

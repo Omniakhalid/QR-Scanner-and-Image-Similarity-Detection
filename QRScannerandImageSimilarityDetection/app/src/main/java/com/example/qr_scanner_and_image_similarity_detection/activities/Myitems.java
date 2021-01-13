@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.example.qr_scanner_and_image_similarity_detection.ItemCardClass;
+import com.example.qr_scanner_and_image_similarity_detection.adapters.MyItemAdapter;
 import com.example.qr_scanner_and_image_similarity_detection.R;
 
 import java.io.FileNotFoundException;
@@ -47,7 +48,7 @@ public class Myitems extends AppCompatActivity {
 
         MyRecyclerView =findViewById(R.id.Recclarvie);
         myResLaoutMan=new LinearLayoutManager(this);
-        myResAdapter=new com.example.qr_scanner_and_image_similarity_detection.MyItemAdapter(ItemList);
+        myResAdapter=new MyItemAdapter(ItemList);
         MyRecyclerView.setLayoutManager(myResLaoutMan);
         MyRecyclerView.setAdapter(myResAdapter);
 
@@ -56,7 +57,11 @@ public class Myitems extends AppCompatActivity {
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ItemList.add(new ItemCardClass(decre.getText().toString(),"Category is : "+ cateSpin.getSelectedItem().toString(), bitmap));
+                ItemCardClass NewItem=new ItemCardClass();
+                NewItem.setDiscreaption(decre.getText().toString());
+                NewItem.setmCategory("Category is : "+ cateSpin.getSelectedItem().toString());
+                NewItem.setImageSource(bitmap);
+                ItemList.add(NewItem);
                 myResAdapter.notifyDataSetChanged();
             }
         });
