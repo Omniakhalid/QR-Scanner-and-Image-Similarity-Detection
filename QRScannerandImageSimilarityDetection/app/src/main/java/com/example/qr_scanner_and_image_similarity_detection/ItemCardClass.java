@@ -5,22 +5,31 @@ import android.graphics.Bitmap;
 public class ItemCardClass {
     private String Discreaption;
     private String mCategory;
-    private Bitmap Save;
-    public ItemCardClass(String text1, String text2, Bitmap imageResource){
-        Discreaption=text1;
-        mCategory=text2;
-        Save=imageResource;
+    private Bitmap ImageSource;
+    public ItemCardClass(){
     }
 
-    public String getMyText1() {
+    public String getDiscreaption() {
         return Discreaption;
     }
 
-    public String getMyText2() {
+    public String getmCategory() {
         return mCategory;
     }
 
-    public Bitmap getmImageResource() {
-        return Save;
+    public Bitmap getImageSource() {
+        return ImageSource;
+    }
+
+    public void setDiscreaption(String discreaption) {
+        Discreaption = discreaption;
+    }
+
+    public void setmCategory(String mCategory) {
+        this.mCategory = mCategory;
+    }
+
+    public void setImageSource(Bitmap imageSource) {
+        ImageSource = imageSource;
     }
 }
