@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp"
+    android:background="#f0f0f0"
     tools:context=".activities.sign_in_up_activities.SignupActivity">
     <ImageView
         android:id="@+id/sig_up_logoImage"
@@ -25,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="UserName"
-            app:boxStrokeColor="#000"
+            app:boxStrokeColor="@color/colorPrimaryDark"
             app:counterEnabled="true"
             app:counterMaxLength="15"
             android:transitionName="trans_email">
@@ -41,7 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="E-mail"
-            app:boxStrokeColor="#000">
+            app:boxStrokeColor="@color/colorPrimaryDark">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -55,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
-            app:boxStrokeColor="#000"
+            app:boxStrokeColor="@color/colorPrimaryDark"
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -74,7 +75,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:boxStrokeColor="#000"
+            app:boxStrokeColor="@color/colorPrimaryDark"
             android:hint="Confirm Password">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -88,7 +89,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:boxStrokeColor="#000"
+            app:boxStrokeColor="@color/colorPrimaryDark"
             android:hint="Phone Number">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -102,7 +103,7 @@
             android:layout_height="wrap_content"
             android:text="Choose Gender "
             android:textSize="18sp"
-            android:textColor="#000"
+            android:textColor="@color/colorPrimaryDark"
             android:layout_marginTop="10dp"
             />
 
@@ -118,6 +119,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@color/colorPrimaryDark"
                 android:text="Male" />
 
             <RadioButton
@@ -125,6 +127,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@color/colorPrimaryDark"
                 android:text="Female" />
         </RadioGroup>
     </LinearLayout>
@@ -146,7 +149,7 @@
         android:background="@android:color/transparent"
         android:elevation="0dp"
         android:text="Already have an account? LogIn"
-        android:textColor="#000"
+        android:textColor="@color/colorPrimaryDark"
         android:transitionName="trans__sign_in_btn" />
 
 </LinearLayout>

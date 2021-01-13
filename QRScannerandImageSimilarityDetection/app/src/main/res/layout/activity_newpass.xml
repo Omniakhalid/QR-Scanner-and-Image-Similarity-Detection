@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#f0f0f0"
     android:padding="30dp"
-    tools:context=".NewpassActivity">
+    tools:context=".activities.sign_in_up_activities.NewpassActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,7 +21,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#185ED3"
+            android:textColor="@color/colorPrimaryDark"
             app:fontFamily="sans-serif-black"
             android:textSize="40sp"
             android:layout_gravity="center"
@@ -37,7 +38,7 @@
             android:gravity="center"
             android:text="your identity has been verified! set your new password"
             android:textAlignment="center"
-            android:textColor="#000"
+            android:textColor="@color/colorPrimary"
             android:textSize="16sp" />
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -45,7 +46,7 @@
             android:id="@+id/new_new_pass_editTxt"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            app:boxStrokeColor="#000"
+            app:boxStrokeColor="@color/colorPrimaryDark"
             android:hint="New Password"
             app:passwordToggleEnabled="true">
 
@@ -62,7 +63,7 @@
             android:id="@+id/new_conf_pass_editTxt"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            app:boxStrokeColor="#000"
+            app:boxStrokeColor="@color/colorPrimaryDark"
             android:hint="Confirm Password"
             app:passwordToggleEnabled="true">
 

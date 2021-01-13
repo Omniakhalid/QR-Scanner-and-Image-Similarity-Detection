@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#f0f0f0"
     tools:context=".activities.sign_in_up_activities.SelectionActivity"
     android:padding="30dp">
     <LinearLayout
@@ -16,7 +17,7 @@
             android:layout_height="wrap_content"
             android:text="Make selection"
             android:textAllCaps="true"
-            android:textColor="#185ED3"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="40sp"
             android:layout_marginTop="30dp"
             app:fontFamily="sans-serif-black" />
@@ -26,7 +27,7 @@
             android:layout_height="wrap_content"
             android:text="select which contact detail should we use to reset your password"
             android:textSize="18sp"
-            android:textColor="#000"
+            android:textColor="@color/colorPrimary"
             android:textAlignment="center"
             android:layout_gravity="center"/>
         <RelativeLayout
@@ -50,13 +51,14 @@
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/mobile_icon"
                 android:text="Via sms"
+                android:textColor="@color/colorPrimaryDark"
                 android:layout_marginTop="30dp"
                 android:textSize="25sp" />
             <TextView
                 android:id="@+id/mobile_des"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#000"
+                android:textColor="@color/colorPrimary"
                 android:layout_toRightOf="@id/mobile_icon"
                 android:layout_below="@id/mobile_txt"
                 android:text="+0201858683855"
@@ -86,6 +88,7 @@
                 android:id="@+id/mail_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
                 android:layout_toRightOf="@id/mail_icon"
                 android:text="Via sms"
                 android:layout_marginTop="30dp"
@@ -94,7 +97,7 @@
                 android:id="@+id/mail_des"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#000"
+                android:textColor="@color/colorPrimary"
                 android:layout_toRightOf="@id/mail_icon"
                 android:layout_below="@id/mail_txt"
                 android:text="omnia@gmail.com"

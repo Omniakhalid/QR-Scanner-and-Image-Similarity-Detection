@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:background="#f0f0f0"
     android:padding="20dp"
     android:orientation="vertical"
@@ -32,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:hint="E-mail"
-            app:boxStrokeColor="#345DA7"
+            app:boxStrokeColor="@color/colorPrimaryDark"
             android:transitionName="trans_email">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -46,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
-            app:boxStrokeColor="#345DA7"
+            app:boxStrokeColor="@color/colorPrimaryDark"
             app:passwordToggleEnabled="true"
             android:transitionName="trans_password">
 
@@ -65,9 +64,9 @@
             android:layout_margin="5dp"
             android:background="@android:color/transparent"
             android:elevation="0dp"
-            android:textAlignment="textEnd"
             android:text="Forget Password?"
-            android:textColor="#3b8ac4"
+            android:textAlignment="viewEnd"
+            android:textColor="@color/colorPrimaryDark"
             android:transitionName="trans_forget_btn"
             tools:ignore="RtlCompat" />
 
@@ -92,7 +91,7 @@
             android:background="@android:color/transparent"
             android:elevation="0dp"
             android:text="New Member?   Join Us"
-            android:textColor="#000"
+            android:textColor="@color/colorPrimaryDark"
             android:transitionName="trans__sign_in_up_btn" />
 
     </LinearLayout>

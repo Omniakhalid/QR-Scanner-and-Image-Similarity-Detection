@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#f0f0f0"
     tools:context=".activities.sign_in_up_activities.ResetActivity"
     android:padding="30dp">
     <LinearLayout
@@ -26,7 +27,7 @@
             android:layout_height="wrap_content"
             android:text="Forget Password"
             android:textAllCaps="true"
-            android:textColor="#185ED3"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="40sp"
             android:layout_marginTop="10dp"
             android:layout_gravity="center"
@@ -43,7 +44,7 @@
             android:gravity="center"
             android:text="provide your account's e-mail for which you want to reset your password"
             android:textAlignment="center"
-            android:textColor="#000"
+            android:textColor="@color/colorPrimary"
             android:textSize="18sp"
             android:transitionName="txt2" />
         <com.google.android.material.textfield.TextInputLayout
@@ -52,7 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            app:boxStrokeColor="#000"
+            app:boxStrokeColor="@color/colorPrimaryDark"
             android:hint="E-mail or UserName"
             android:transitionName="trans_email">
 
