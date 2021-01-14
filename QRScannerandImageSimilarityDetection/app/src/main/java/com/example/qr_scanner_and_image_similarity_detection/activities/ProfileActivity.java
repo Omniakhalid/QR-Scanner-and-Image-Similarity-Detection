@@ -4,10 +4,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.qr_scanner_and_image_similarity_detection.R;
+import com.google.android.material.textfield.TextInputLayout;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -16,13 +18,13 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        EditText NameEdt =findViewById(R.id.Pro_Name_edTxt);
-        EditText PassEdt =findViewById(R.id.Pro_Pass_edTxt);
-        EditText NumberEdt =findViewById(R.id.Pro_Number_edTxt);
+        TextInputLayout NameEdt =findViewById(R.id.Pro_Name_edTxt);
+        TextInputLayout PassEdt =findViewById(R.id.Pro_Pass_edTxt);
+        TextInputLayout NumberEdt =findViewById(R.id.Pro_Number_edTxt);
 
-        Button EditNameButton=findViewById(R.id.Pro_EditNameBtn);
-        Button EditPassButton=findViewById(R.id.Pro_EditPassBtn);
-        Button EditNunberButton=findViewById(R.id.Pro_EditNunberBtn);
+        ImageView EditNameButton=findViewById(R.id.Pro_EditNameBtn);
+        ImageView EditPassButton=findViewById(R.id.Pro_EditPassBtn);
+        ImageView EditNunberButton=findViewById(R.id.Pro_EditNunberBtn);
         Button SaveButton=findViewById(R.id.Pro_SaveBtn);
 
         NameEdt.setEnabled(false);
