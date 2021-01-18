@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             app:boxStrokeColor="@color/colorPrimaryDark"
-            android:hint="E-mail or UserName"
+            android:hint="Write your Email"
             android:transitionName="trans_email">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -62,18 +62,19 @@
                 android:layout_height="wrap_content"
                 android:textColor="#000"/>
         </com.google.android.material.textfield.TextInputLayout>
+
         <Button
-            android:id="@+id/res_next_btn"
+            android:id="@+id/forgetpass_act_Sendmail_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="20sp"
             android:layout_marginBottom="5dp"
             android:background="@drawable/rounded_shapes"
-            android:text="Next"
-            android:layout_gravity="center"
+            android:text="Send"
             android:textColor="#fff"
             android:textSize="21dp"
-            android:transitionName="trans_forget_btn"/>
+            android:transitionName="trans_forget_btn" />
     </LinearLayout>
 
 </LinearLayout>

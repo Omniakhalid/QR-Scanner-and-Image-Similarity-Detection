@@ -28,6 +28,7 @@ import com.example.qr_scanner_and_image_similarity_detection.fragments.Reminder_
 import com.example.qr_scanner_and_image_similarity_detection.fragments.Scan_Qr_Fragment;
 import com.example.qr_scanner_and_image_similarity_detection.fragments.Upload_photo_Fragment;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
@@ -40,13 +41,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private FragmentTransaction transaction;
     private NavigationView nav_view;
 
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        field_initialization();
+        Init();
         OpenNavDrawer();
 
 
@@ -140,7 +142,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    private void field_initialization() {
+    private void Init() {
+
+        auth = FirebaseAuth.getInstance();
 
         drawerLayout = findViewById(R.id.nav_drawer);
         nav_view = findViewById(R.id.navigation);
@@ -154,7 +158,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.container, fragment);
-        transaction.addToBackStack(null);
         transaction.commit();
 
     }
@@ -187,8 +190,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 openActivity(ProfileActivity.class);
                 break;
             case R.id.nav_drawer_logout:
-                finish();
                 openActivity(SigninActivity.class);
+                auth.signOut();
+                finish();
                 break;
             case R.id.nav_drawer_my_item:
                 openActivity(Myitems.class);
