@@ -112,10 +112,12 @@ public class SigninActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    if(current_user.isEmailVerified()){
+                    if(FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()){
                         SendToActivity(HomeActivity.class);
                     }
                     else {
+                        email.getEditText().getText().clear();
+                        pass.getEditText().getText().clear();
                         SendToActivity(Activation.class);
                     }
                 }else

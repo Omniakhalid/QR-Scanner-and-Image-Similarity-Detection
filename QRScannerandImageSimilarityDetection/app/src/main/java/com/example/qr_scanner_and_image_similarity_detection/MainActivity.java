@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
             }
         },splash_time);
     }
+
     void Init(){
         auth = FirebaseAuth.getInstance();
         current_user = auth.getCurrentUser();
@@ -70,11 +71,11 @@ public class MainActivity extends AppCompatActivity {
 
     void ChooseActivity(){
         if (current_user != null) {
-        //    if(current_user.isEmailVerified()){
+            if(current_user.isEmailVerified()){
                   login = new Intent(MainActivity.this, HomeActivity.class);
-        //    }else {
-        //        login = new Intent(MainActivity.this,Activation.class);
-        //    }
+            }else {
+               login = new Intent(MainActivity.this,SigninActivity.class);
+            }
         } else {
             login = new Intent(MainActivity.this, SigninActivity.class);
         }
