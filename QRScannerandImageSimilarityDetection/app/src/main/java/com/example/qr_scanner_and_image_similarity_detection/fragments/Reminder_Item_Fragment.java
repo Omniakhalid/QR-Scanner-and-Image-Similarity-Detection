@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -18,18 +19,28 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.example.qr_scanner_and_image_similarity_detection.R;
+import com.example.qr_scanner_and_image_similarity_detection.models.Reminder;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 
 public class Reminder_Item_Fragment extends Fragment {
     int hours,minuits;
+    DatabaseReference databaseReminder;
+    private List<String> itemlist=new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_reminder__item_, container, false);
+       //******************************************************************************************
+        databaseReminder= FirebaseDatabase.getInstance().getReference("Reminder");
         //************************settime********************************************
         final TextView settime=(TextView)root.findViewById(R.id.settime);
         final TextView settimetext=(TextView)root.findViewById(R.id.settimeText);
@@ -68,6 +79,7 @@ public class Reminder_Item_Fragment extends Fragment {
                 EditText edit_addTask= (EditText)root.findViewById(R.id.addObject_field);
                 String value=edit_addTask.getText().toString();
                 myadapter.add(value);
+                itemlist.add(value);
                 edit_addTask.getText().clear(); }
         });
 
@@ -81,6 +93,27 @@ public class Reminder_Item_Fragment extends Fragment {
             }
         });
         //*****************************************************************************************************
+       Button save=(Button)root.findViewById(R.id.save);
+       save.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               Calendar calendar=Calendar.getInstance();
+               SimpleDateFormat simpleDateFormat=new SimpleDateFormat("HH:mm:ss");
+               String currentTime=simpleDateFormat.format(calendar.getTime());
+
+               String endTime=settimetext.getText().toString();
+
+               String remId=databaseReminder.push().getKey();
+
+               Reminder reminder=new Reminder(remId,currentTime,endTime,itemlist,"0","0");
+               databaseReminder.child(remId).setValue(reminder);
+
+
+
+           }
+       });
+
+
 
         return root;
 

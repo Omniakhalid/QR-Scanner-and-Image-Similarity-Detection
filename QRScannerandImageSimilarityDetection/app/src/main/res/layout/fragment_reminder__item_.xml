@@ -53,7 +53,7 @@
         android:text="Set your return time." />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/save"
         android:layout_width="103dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
