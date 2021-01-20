@@ -1,6 +1,7 @@
 <resources>
     <!--<string name="app_name">QR-Scanner-and-Image-Similarity-Detection</string>-->
     <string name="app_name">GP_Project</string>
+    <string name="title_activity_maps">Map</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
     <!-- TODO: Remove or change this placeholder text -->
