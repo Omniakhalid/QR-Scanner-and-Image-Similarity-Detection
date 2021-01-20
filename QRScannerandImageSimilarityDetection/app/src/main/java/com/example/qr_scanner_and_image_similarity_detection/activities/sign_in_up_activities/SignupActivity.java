@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.qr_scanner_and_image_similarity_detection.Activation;
 import com.example.qr_scanner_and_image_similarity_detection.R;
 import com.example.qr_scanner_and_image_similarity_detection.activities.HomeActivity;
 import com.example.qr_scanner_and_image_similarity_detection.models.User;
