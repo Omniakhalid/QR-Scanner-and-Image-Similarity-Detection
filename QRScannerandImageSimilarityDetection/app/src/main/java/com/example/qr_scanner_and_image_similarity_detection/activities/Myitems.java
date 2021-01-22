@@ -129,7 +129,7 @@ public class Myitems extends AppCompatActivity {
                 NewItem.setmCategory(String.valueOf(cateSpin.getSelectedItemPosition()));
                 NewItem.setmCategory("Category is : "+ cateSpin.getSelectedItem().toString());
                 NewItem.setItemLostSwitch(false);
-                NewItem.setDeleteItem(R.drawable.ic_delete);
+                NewItem.setDeleteItem(R.drawable.ic_delete_icon);
                 reff.child(String.valueOf(Firebase_id)).setValue(NewItem);
                     Firebase_id++;
                 ItemList.add(NewItem);
