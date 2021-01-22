@@ -5,13 +5,30 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.qr_scanner_and_image_similarity_detection.R;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class ProfileActivity extends AppCompatActivity {
+
+    EditText Name;
+    EditText Pass;
+    EditText Phone;
+    TextView Email;
+    DatabaseReference reff;
+    private FirebaseUser current_user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +43,36 @@ public class ProfileActivity extends AppCompatActivity {
         ImageView EditPassButton=findViewById(R.id.Pro_EditPassBtn);
         ImageView EditNunberButton=findViewById(R.id.Pro_EditNunberBtn);
         Button SaveButton=findViewById(R.id.Pro_SaveBtn);
+
+        Name=findViewById(R.id.NameEditText);
+        Pass=findViewById(R.id.PassEditText);
+        Phone=findViewById(R.id.NumberEditText);
+        Email=findViewById(R.id.EmailEditText);
+
+
+        current_user = FirebaseAuth.getInstance().getCurrentUser();
+        String id=current_user.getUid();
+        Toast.makeText(ProfileActivity.this,id,Toast.LENGTH_LONG).show();
+        /*reff=  FirebaseDatabase.getInstance().getReference().child("Users").child("1");
+        reff.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String email=dataSnapshot.child("email").getValue().toString();
+                String name=dataSnapshot.child("name").getValue().toString();
+                String pass=dataSnapshot.child("password").getValue().toString();
+                String phone=dataSnapshot.child("phone").getValue().toString();
+
+                Name.setText(name);
+                Pass.setText(pass);
+                Phone.setText(phone);
+                Email.setText(email);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });*/
 
         NameEdt.setEnabled(false);
         PassEdt.setEnabled(false);
@@ -61,6 +108,12 @@ public class ProfileActivity extends AppCompatActivity {
                 NameEdt.setEnabled(false);
                 PassEdt.setEnabled(false);
                 NumberEdt.setEnabled(false);
+
+               /* reff.child("Users").child("1").child("name").setValue(Name.getText());
+                reff.child("Users").child("1").child("password").setValue(Pass.getText());
+                reff.child("Users").child("1").child("phone").setValue(Phone.getText());
+                reff.child("Users").child("1").child("email").setValue(Email.getText());*/
+
             }
         });
     }

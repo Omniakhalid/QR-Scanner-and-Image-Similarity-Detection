@@ -41,7 +41,7 @@
 
 
         <TextView
-            android:id="@+id/Item_CategoryTxt"
+            android:id="@+id/EmailEditText"
             android:layout_width="153dp"
             android:layout_height="41dp"
             android:layout_gravity="center"
@@ -71,6 +71,7 @@
             app:boxStrokeColor="@color/colorPrimaryDark">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/NameEditText"
                 android:layout_width="269dp"
                 android:layout_height="59dp"
                 android:text="UserName" />
@@ -100,6 +101,7 @@
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/PassEditText"
                 android:layout_width="265dp"
                 android:layout_height="59dp"
                 android:layout_marginLeft="5dp"
@@ -131,6 +133,7 @@
             app:boxStrokeColor="@color/colorPrimaryDark">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/NumberEditText"
                 android:layout_width="269dp"
                 android:layout_height="59dp"
                 android:text="Number" />

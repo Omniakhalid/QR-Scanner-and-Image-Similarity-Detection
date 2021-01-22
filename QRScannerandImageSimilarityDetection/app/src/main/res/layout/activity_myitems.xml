@@ -9,19 +9,18 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/Recclarvie"
-        android:layout_width="406dp"
-        android:layout_height="415dp"
+        android:layout_width="396dp"
+        android:layout_height="444dp"
         android:layout_below="@+id/Rescleritem"
         android:layout_alignParentBottom="true"
+        android:layout_marginTop="20dp"
         android:background="@android:color/darker_gray"
         android:padding="4dp"
         android:scrollbars="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
-        app:layout_constraintVertical_bias="0.352"
         tools:ignore="UnknownId" />
 
     <RelativeLayout
@@ -73,9 +72,9 @@
             android:layout_marginRight="37dp"
             android:layout_marginBottom="85dp"
             android:ems="10"
-            android:hint="Description"
-            android:inputType="textPersonName"
             android:gravity="start"
+            android:hint="Enter Item description"
+            android:inputType="textPersonName"
             android:textColor="@color/colorPrimary"
             android:textColorHint="@color/colorPrimary"
             android:textSize="18sp" />

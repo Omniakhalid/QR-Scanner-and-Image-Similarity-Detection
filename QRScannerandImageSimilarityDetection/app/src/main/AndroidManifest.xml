@@ -37,8 +37,8 @@
         <activity android:name=".activities.ProfileActivity" />
         <activity android:name=".activities.ChatActivity" />
         <activity android:name=".FindOwner" />
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".MapsActivity">
+        <activity android:name=".MapsActivity"/>
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
