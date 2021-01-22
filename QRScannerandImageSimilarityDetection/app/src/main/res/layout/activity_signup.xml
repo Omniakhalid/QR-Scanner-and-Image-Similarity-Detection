@@ -67,12 +67,14 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
-        <TextView
-            android:id="@+id/strong_pass_txtView"
+
+        <CheckBox
+            android:id="@+id/sugg_pass_checkBox"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Strong Password  #######"
-            android:textSize="15dp"/>
+            android:layout_height="23dp"
+            android:text="Suggest Strong Password"
+            android:textColor="@color/colorPrimaryDark" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/sig_up_name_editTxt"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"

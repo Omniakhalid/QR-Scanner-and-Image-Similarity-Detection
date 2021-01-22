@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
@@ -31,6 +33,8 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
+import java.util.Random;
+
 public class SignupActivity extends AppCompatActivity {
 
     TextInputEditText UserName;
@@ -41,6 +45,7 @@ public class SignupActivity extends AppCompatActivity {
     RadioButton Male;
     RadioButton Female;
     Button signup_btn;
+    CheckBox SuggestPass_checkbox;
 
     private User user;
     private String name;
@@ -63,6 +68,16 @@ public class SignupActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         current_user = auth.getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference();
+
+        SuggestPass_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(SuggestPass_checkbox.isChecked()){
+                    String strong_pass = generateRandomPassword(8,true,true,true,true);
+                    UserPass.setText(strong_pass);
+                }
+            }
+        });
 
         signup_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,7 +119,7 @@ public class SignupActivity extends AppCompatActivity {
         UserPhone = findViewById(R.id.Phone_txtview);
         Male = findViewById(R.id.male_radioBtn);
         Female = findViewById(R.id.female_radioBtn);
-
+        SuggestPass_checkbox = findViewById(R.id.sugg_pass_checkBox);
     }
 
     void SignUp() {
@@ -163,5 +178,42 @@ public class SignupActivity extends AppCompatActivity {
         Intent i = new Intent(getApplicationContext(), c);
         startActivity(i);
         finish();
+    }
+
+     String generateRandomPassword(int max_length, boolean upperCase, boolean lowerCase, boolean numbers, boolean specialCharacters)
+    {
+        String upperCaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String lowerCaseChars = "abcdefghijklmnopqrstuvwxyz";
+        String numberChars = "0123456789";
+        String specialChars = "!@#$%&*_-+=?/";
+        String allowedChars = "";
+
+        Random rn = new Random();
+        StringBuilder strong_pass = new StringBuilder(max_length);
+
+        if(upperCase) {
+            allowedChars += upperCaseChars;
+            strong_pass.append(upperCaseChars.charAt(rn.nextInt(upperCaseChars.length()-1)));
+        }
+
+        if(lowerCase) {
+            allowedChars += lowerCaseChars;
+            strong_pass.append(lowerCaseChars.charAt(rn.nextInt(lowerCaseChars.length()-1)));
+        }
+
+        if(numbers) {
+            allowedChars += numberChars;
+            strong_pass.append(numberChars.charAt(rn.nextInt(numberChars.length()-1)));
+        }
+
+        if(specialCharacters) {
+            allowedChars += specialChars;
+            strong_pass.append(specialChars.charAt(rn.nextInt(specialChars.length()-1)));
+        }
+
+        for(int i=strong_pass.length(); i< max_length; ++i){
+            strong_pass.append(allowedChars.charAt(rn.nextInt(allowedChars.length())));
+        }
+        return  strong_pass.toString();
     }
 }
