@@ -95,7 +95,6 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:counterMaxLength="11"
             app:boxStrokeColor="@color/colorPrimaryDark"
             app:counterMaxLength="11"
             android:hint="Phone Number">

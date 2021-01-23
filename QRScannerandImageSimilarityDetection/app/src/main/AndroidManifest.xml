@@ -37,15 +37,9 @@
         <activity android:name=".activities.ProfileActivity" />
         <activity android:name=".activities.ChatActivity" />
         <activity android:name=".FindOwner" />
-<<<<<<< Updated upstream
-        <activity android:name=".MapsActivity"/>
-        <activity android:name=".MainActivity">
-=======
+        <activity android:name=".MapsActivity" />
         <activity android:name=".MainActivity">
 
-        </activity>
-        <activity android:name=".MapsActivity">
->>>>>>> Stashed changes
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -60,10 +54,12 @@
         <activity
             android:name=".activities.HomeActivity"
             android:theme="@style/Theme.WithActionBar"></activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
     </application>
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
