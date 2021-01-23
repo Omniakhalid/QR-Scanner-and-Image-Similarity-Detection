@@ -3,14 +3,22 @@ package com.example.qr_scanner_and_image_similarity_detection.models;
 import android.graphics.Bitmap;
 
 public class User {
+    private String UId;
     private String Name;
     private String Email;
     private String Password;
     private String Phone;
     private String Gender;
-    private Bitmap QR;
 
     public User() {
+    }
+
+    public String getUId() {
+        return UId;
+    }
+
+    public void setUId(String UId) {
+        this.UId = UId;
     }
 
     public String getName() {
@@ -53,11 +61,4 @@ public class User {
         Gender = gender;
     }
 
-    public Bitmap getQR() {
-        return QR;
-    }
-
-    public void setQR(Bitmap QR) {
-        this.QR = QR;
-    }
 }

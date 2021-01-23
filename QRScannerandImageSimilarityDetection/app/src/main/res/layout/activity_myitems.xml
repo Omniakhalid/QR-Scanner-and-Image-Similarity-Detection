@@ -104,9 +104,9 @@
             android:layout_marginRight="227dp"
             android:layout_marginBottom="40dp"
             android:background="@color/colorPrimary"
+            android:entries="@array/ItemCategories"
             android:spinnerMode="dropdown"
-            android:theme="@style/spinnerTheme"
-            android:entries="@array/Categories" />
+            android:theme="@style/spinnerTheme" />
 
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

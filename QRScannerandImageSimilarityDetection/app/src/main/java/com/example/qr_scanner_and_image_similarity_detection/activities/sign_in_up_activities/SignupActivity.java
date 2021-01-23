@@ -72,8 +72,8 @@ public class SignupActivity extends AppCompatActivity {
         SuggestPass_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(SuggestPass_checkbox.isChecked()){
-                    String strong_pass = generateRandomPassword(8,true,true,true,true);
+                if (SuggestPass_checkbox.isChecked()) {
+                    String strong_pass = generateRandomPassword(8, true, true, true, true);
                     UserPass.setText(strong_pass);
                 }
             }
@@ -95,14 +95,17 @@ public class SignupActivity extends AppCompatActivity {
 
                 if (!(name.equals("") && email.equals("") && password.equals("") && confpass.equals("") && phone.equals("") && gender.equals(""))) {
                     if (password.equals(confpass)) {
-                        CreateUser();
-                        SignUp();
+                        if (phone.startsWith("01") && phone.length() == 11) {
+                            CreateUser();
+                            SignUp();
+                        } else {
+                            ShowMessage("Please, Enter right number..");
+                        }
                     } else {
-                        ShowMessage("Please Write same password");
+                        ShowMessage("Please, Write same password");
                     }
-                }
-                else {
-                        ShowMessage("Fill all Empty fields");
+                } else {
+                    ShowMessage("Fill all Empty fields");
                 }
             }
         });
@@ -131,9 +134,8 @@ public class SignupActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             ShowMessage("Confirmation Email Was Sent");
-                            //GenerateQR();
-                            current_user = FirebaseAuth.getInstance().getCurrentUser();
-                            databaseReference.child("Users").child(current_user.getUid()).setValue(user);
+                            user.setUId(current_user.getUid());
+                            databaseReference.child("Users").child(user.getUId()).setValue(user);
                             ShowMessage("Registration Success");
                             SendToActivity(SigninActivity.class);
                         }
@@ -163,25 +165,14 @@ public class SignupActivity extends AppCompatActivity {
         user.setGender(gender);
     }
 
-    void GenerateQR() {
-        MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
-        try {
-            BitMatrix bitMatrix = multiFormatWriter.encode(current_user.getUid(), BarcodeFormat.QR_CODE, 500, 500);
-            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
-            Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
-            user.setQR(bitmap);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    void SendToActivity(Class c){
+
+    void SendToActivity(Class c) {
         Intent i = new Intent(getApplicationContext(), c);
         startActivity(i);
         finish();
     }
 
-     String generateRandomPassword(int max_length, boolean upperCase, boolean lowerCase, boolean numbers, boolean specialCharacters)
-    {
+    String generateRandomPassword(int max_length, boolean upperCase, boolean lowerCase, boolean numbers, boolean specialCharacters) {
         String upperCaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         String lowerCaseChars = "abcdefghijklmnopqrstuvwxyz";
         String numberChars = "0123456789";
@@ -191,29 +182,29 @@ public class SignupActivity extends AppCompatActivity {
         Random rn = new Random();
         StringBuilder strong_pass = new StringBuilder(max_length);
 
-        if(upperCase) {
+        if (upperCase) {
             allowedChars += upperCaseChars;
-            strong_pass.append(upperCaseChars.charAt(rn.nextInt(upperCaseChars.length()-1)));
+            strong_pass.append(upperCaseChars.charAt(rn.nextInt(upperCaseChars.length() - 1)));
         }
 
-        if(lowerCase) {
+        if (lowerCase) {
             allowedChars += lowerCaseChars;
-            strong_pass.append(lowerCaseChars.charAt(rn.nextInt(lowerCaseChars.length()-1)));
+            strong_pass.append(lowerCaseChars.charAt(rn.nextInt(lowerCaseChars.length() - 1)));
         }
 
-        if(numbers) {
+        if (numbers) {
             allowedChars += numberChars;
-            strong_pass.append(numberChars.charAt(rn.nextInt(numberChars.length()-1)));
+            strong_pass.append(numberChars.charAt(rn.nextInt(numberChars.length() - 1)));
         }
 
-        if(specialCharacters) {
+        if (specialCharacters) {
             allowedChars += specialChars;
-            strong_pass.append(specialChars.charAt(rn.nextInt(specialChars.length()-1)));
+            strong_pass.append(specialChars.charAt(rn.nextInt(specialChars.length() - 1)));
         }
 
-        for(int i=strong_pass.length(); i< max_length; ++i){
+        for (int i = strong_pass.length(); i < max_length; ++i) {
             strong_pass.append(allowedChars.charAt(rn.nextInt(allowedChars.length())));
         }
-        return  strong_pass.toString();
+        return strong_pass.toString();
     }
 }
