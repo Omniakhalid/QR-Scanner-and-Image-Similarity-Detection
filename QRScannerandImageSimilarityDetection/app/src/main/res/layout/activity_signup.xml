@@ -97,6 +97,7 @@
             android:layout_height="wrap_content"
             app:counterMaxLength="11"
             app:boxStrokeColor="@color/colorPrimaryDark"
+            app:counterMaxLength="11"
             android:hint="Phone Number">
 
             <com.google.android.material.textfield.TextInputEditText

@@ -37,11 +37,17 @@
         <activity android:name=".activities.ProfileActivity" />
         <activity android:name=".activities.ChatActivity" />
         <activity android:name=".FindOwner" />
+<<<<<<< Updated upstream
         <activity android:name=".MapsActivity"/>
         <activity android:name=".MainActivity">
+=======
+        <activity android:name=".MainActivity">
+
+        </activity>
+        <activity android:name=".MapsActivity">
+>>>>>>> Stashed changes
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

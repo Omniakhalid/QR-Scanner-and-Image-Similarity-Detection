@@ -95,11 +95,20 @@ public class SignupActivity extends AppCompatActivity {
 
                 if (!(name.equals("") && email.equals("") && password.equals("") && confpass.equals("") && phone.equals("") && gender.equals(""))) {
                     if (password.equals(confpass)) {
+<<<<<<< Updated upstream
                         if (phone.startsWith("01") && phone.length() == 11) {
                             CreateUser();
                             SignUp();
                         } else {
                             ShowMessage("Please, Enter right number..");
+=======
+                        if (phone.substring(0, 2).equals("01")&& phone.length()==11) {
+                            CreateUser();
+                            SignUp();
+                        }
+                        else {
+                            ShowMessage("Please enter Correct phone number");
+>>>>>>> Stashed changes
                         }
                     } else {
                         ShowMessage("Please, Write same password");
@@ -165,6 +174,20 @@ public class SignupActivity extends AppCompatActivity {
         user.setGender(gender);
     }
 
+<<<<<<< Updated upstream
+=======
+    void GenerateQR() {
+        MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+        try {
+            BitMatrix bitMatrix = multiFormatWriter.encode(current_user.getUid(), BarcodeFormat.QR_CODE, 500, 500);
+            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+            Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
+            user.setQR(bitmap);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+>>>>>>> Stashed changes
 
     void SendToActivity(Class c) {
         Intent i = new Intent(getApplicationContext(), c);

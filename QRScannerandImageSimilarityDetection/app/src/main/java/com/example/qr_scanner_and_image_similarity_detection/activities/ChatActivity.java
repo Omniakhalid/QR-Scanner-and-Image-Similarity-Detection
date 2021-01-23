@@ -23,8 +23,8 @@ import java.util.List;
 public class ChatActivity extends AppCompatActivity {
 
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        MenuInflater inflater=new MenuInflater(this);
-        inflater.inflate(R.menu.optionmenu,menu);
+        MenuInflater inflater = new MenuInflater(this);
+        inflater.inflate(R.menu.optionmenu, menu);
     }
 
     @Override
@@ -40,9 +40,9 @@ public class ChatActivity extends AppCompatActivity {
         return false;
     }
 
-    List<MessageChatModel> messageChatModelList =  new ArrayList<>();
+    List<MessageChatModel> messageChatModelList = new ArrayList<>();
     RecyclerView recyclerView;
-    MessageChatAdapter adapter ;
+    MessageChatAdapter adapter;
 
     EditText messageET;
     ImageView sendBtn;
@@ -51,13 +51,13 @@ public class ChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-        ImageView menu=(ImageView)findViewById(R.id.optionmenu) ;
+        ImageView menu = (ImageView) findViewById(R.id.optionmenu);
         registerForContextMenu(menu);
 
-        messageET = (EditText)findViewById(R.id.messageET);
+        messageET = (EditText) findViewById(R.id.messageET);
         sendBtn = (ImageView) findViewById(R.id.sendBtn);
 
-        recyclerView = (RecyclerView)findViewById(R.id.recycler_view);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         LinearLayoutManager manager = new LinearLayoutManager(ChatActivity.this, RecyclerView.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
 
@@ -146,7 +146,7 @@ public class ChatActivity extends AppCompatActivity {
 
 //********************* recycler view *************************************************************
         recyclerView.smoothScrollToPosition(messageChatModelList.size());
-        adapter = new MessageChatAdapter(messageChatModelList, ChatActivity.this );
+        adapter = new MessageChatAdapter(messageChatModelList, ChatActivity.this);
         recyclerView.setAdapter(adapter);
 
 
@@ -169,8 +169,8 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
-      //return to home
-        ImageView returnHome=(ImageView)findViewById(R.id.returntoHome) ;
+        //return to home
+        ImageView returnHome = (ImageView) findViewById(R.id.returntoHome);
         returnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
