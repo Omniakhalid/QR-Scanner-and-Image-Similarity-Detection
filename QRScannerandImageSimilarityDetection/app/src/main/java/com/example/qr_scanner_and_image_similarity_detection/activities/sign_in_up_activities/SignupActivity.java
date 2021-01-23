@@ -134,7 +134,7 @@ public class SignupActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             ShowMessage("Confirmation Email Was Sent");
-                            user.setUId(current_user.getUid());
+                            user.setUId(auth.getCurrentUser().getUid());
                             databaseReference.child("Users").child(user.getUId()).setValue(user);
                             ShowMessage("Registration Success");
                             SendToActivity(SigninActivity.class);
@@ -164,8 +164,6 @@ public class SignupActivity extends AppCompatActivity {
         user.setPhone(phone);
         user.setGender(gender);
     }
-
-
 
     void SendToActivity(Class c) {
         Intent i = new Intent(getApplicationContext(), c);
