@@ -3,6 +3,7 @@ package com.example.qr_scanner_and_image_similarity_detection.models;
 import android.graphics.Bitmap;
 
 public class User {
+    
     private String Name;
     private String Email;
     private String Password;

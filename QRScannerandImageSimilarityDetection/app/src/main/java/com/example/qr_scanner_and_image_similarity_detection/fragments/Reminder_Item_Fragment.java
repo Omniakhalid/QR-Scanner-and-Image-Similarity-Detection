@@ -20,6 +20,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.qr_scanner_and_image_similarity_detection.R;
 import com.example.qr_scanner_and_image_similarity_detection.models.Reminder;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -77,10 +79,15 @@ public class Reminder_Item_Fragment extends Fragment {
             @Override
             public void onClick(View view) {
                 EditText edit_addTask= (EditText)root.findViewById(R.id.addObject_field);
-                String value=edit_addTask.getText().toString();
-                myadapter.add(value);
-                itemlist.add(value);
-                edit_addTask.getText().clear(); }
+                if(edit_addTask.getText().toString().equals(""))
+                {Toast.makeText(getActivity(), "you cant add empty field", Toast.LENGTH_LONG).show();}
+                else {
+                    String value = edit_addTask.getText().toString();
+                    myadapter.add(value);
+                    itemlist.add(value);
+                    edit_addTask.getText().clear();
+                }
+            }
         });
 
         //delete item fron listview in longpress in it and show toast confirm deletion
@@ -97,16 +104,29 @@ public class Reminder_Item_Fragment extends Fragment {
        save.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
+               //********************///
                Calendar calendar=Calendar.getInstance();
                SimpleDateFormat simpleDateFormat=new SimpleDateFormat("HH:mm:ss");
                String currentTime=simpleDateFormat.format(calendar.getTime());
-
+              //*****************///
                String endTime=settimetext.getText().toString();
 
                String remId=databaseReminder.push().getKey();
+               final TextView settimetext=(TextView)root.findViewById(R.id.settimeText);
+               final FirebaseUser fuser= FirebaseAuth.getInstance().getCurrentUser();
 
-               Reminder reminder=new Reminder(remId,currentTime,endTime,itemlist,"0","0");
-               databaseReminder.child(remId).setValue(reminder);
+                if(settimetext.getText().toString().equals("Set your return time.")||myadapter.isEmpty()){
+                    Toast.makeText(getActivity(), "please set your return time or add your items", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Reminder reminder=new Reminder(remId,currentTime,endTime,itemlist,"0",fuser.getUid());
+                    databaseReminder.child(remId).setValue(reminder);
+                    myadapter.clear();
+                    itemlist.clear();
+                    settimetext.setText("Set your return time.");
+
+                }
+
 
 
 

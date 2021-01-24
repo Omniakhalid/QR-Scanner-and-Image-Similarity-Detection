@@ -18,4 +18,5 @@
         <item>Item</item>
         <item>Car</item>
     </string-array>
+    <string name="title_activity_message">MessageActivity</string>
 </resources>

@@ -2,5 +2,6 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/QR-Scanner-and-Image-Similarity-Detection" vcs="Git" />
   </component>
 </project>

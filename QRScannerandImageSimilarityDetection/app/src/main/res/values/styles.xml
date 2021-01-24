@@ -1,0 +1,11 @@
+<resources>
+
+    <style name="Theme.QRScannerandImageSimilarityDetection.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.QRScannerandImageSimilarityDetection.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.QRScannerandImageSimilarityDetection.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+</resources>

@@ -1,25 +1,47 @@
 package com.example.qr_scanner_and_image_similarity_detection.models;
 
 public class MessageChatModel {
-    private String text;
-    private String time;
-    private int viewType;
+    private String sender;
+    private String reciver;
+    private String message;
 
-    public MessageChatModel(String text, String time, int viewType) {
-        this.text = text;
-        this.time = time;
-        this.viewType = viewType;
+    public MessageChatModel(String sender, String reciver, String message) {
+        this.sender = sender;
+        this.reciver = reciver;
+        this.message = message;
+    }
+    public MessageChatModel(String sender, String reciever) {
+        this.sender = sender;
+        this.reciver = reciever;
+
+    }
+    public MessageChatModel() {
+
     }
 
-    public String getText() {
-        return text;
+
+
+    public String getSender() {
+        return sender;
     }
 
-    public String getTime() {
-        return time;
+    public void setSender(String sender) {
+        this.sender = sender;
     }
 
-    public int getViewType() {
-        return viewType;
+    public String getReciver() {
+        return reciver;
+    }
+
+    public void setReciver(String reciver) {
+        this.reciver = reciver;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

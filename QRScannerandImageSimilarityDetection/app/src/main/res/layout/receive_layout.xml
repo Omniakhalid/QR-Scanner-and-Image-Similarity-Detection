@@ -48,18 +48,4 @@
     </LinearLayout>
 
 
-    <TextView
-        android:id="@+id/time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/messageLayout"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="10dp"
-        android:fontFamily="@font/opensansregular"
-        android:text="10:25 PM"
-        android:textSize="12dp">
-
-    </TextView>
-
 </RelativeLayout>

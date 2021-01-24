@@ -178,7 +178,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     void showChat(){
 
-        Intent intent = new Intent(this, ChatActivity.class);
+        Intent intent = new Intent(this, UsersChatActivity.class);
         startActivity(intent);
     }
 

@@ -12,16 +12,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qr_scanner_and_image_similarity_detection.R;
 import com.example.qr_scanner_and_image_similarity_detection.models.MessageChatModel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
-public class MessageChatAdapter extends RecyclerView.Adapter {
+public class MessageChatAdapter extends RecyclerView.Adapter<MessageChatAdapter.ViewHolder> {
 
-    List<MessageChatModel> messageChatModelList;
-    Context context;
+   private List<MessageChatModel> messageChatModelList;
+   private Context context;
+    FirebaseUser fuser;
 
-    private static final int VIEW_TYPE_MESSAGE_SENT = 1;
-    private static final int VIEW_TYPE_MESSAGE_RECEIVED = 2;
+    private static final int MESSAGE_TYPE_RIGHT = 1;
+    private static final int MESSAGE_TYPR_LEFT = 2;
 
 
     public MessageChatAdapter(List<MessageChatModel> messageChatModelList, Context context) {
@@ -30,92 +33,60 @@ public class MessageChatAdapter extends RecyclerView.Adapter {
     }
 
     // Determines the appropriate ViewType according to the sender of the message.
+    @NonNull
     @Override
     public int getItemViewType(int position) {
-        MessageChatModel message = (MessageChatModel) messageChatModelList.get(position);
-        if (message.getViewType() == 0) {
-            // If the current user is the sender of the message
-            Log.e("getItemViewType","0");
-            return VIEW_TYPE_MESSAGE_SENT;
-        } else {
-            // If some other user sent the message
-            Log.e("getItemViewType","1");
-            return VIEW_TYPE_MESSAGE_RECEIVED;
-        }
+       fuser= FirebaseAuth.getInstance().getCurrentUser();
+       if(messageChatModelList.get(position).getSender().equals(fuser.getUid()))
+           return MESSAGE_TYPE_RIGHT;
+       else
+           return  MESSAGE_TYPR_LEFT;
+
 
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view;
-        if (viewType == VIEW_TYPE_MESSAGE_SENT) {
-            view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.send_layout, parent, false);
-            return new SentMessageHolder(view);
-        } else if (viewType == VIEW_TYPE_MESSAGE_RECEIVED) {
-            view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.receive_layout, parent, false);
-            return new ReceivedMessageHolder(view);
+        if (viewType == MESSAGE_TYPE_RIGHT) {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.send_layout, parent, false);
+            return new MessageChatAdapter.ViewHolder(view);
         }
-
-        return null;
+        else  {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.receive_layout, parent, false);
+            return new MessageChatAdapter.ViewHolder(view);
+        }
     }
 
+
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MessageChatAdapter.ViewHolder holder, int position) {
 
         MessageChatModel message = messageChatModelList.get(position);
-        switch (holder.getItemViewType()) {
-            case VIEW_TYPE_MESSAGE_SENT:
-                ((SentMessageHolder) holder).bind(message);
-                break;
-            case VIEW_TYPE_MESSAGE_RECEIVED:
-                ((ReceivedMessageHolder) holder).bind(message);
-        }
+        holder.show_message.setText(message.getMessage());
+
     }
 
     @Override
     public int getItemCount() {
+
         return messageChatModelList.size();
     }
 
 
-    private class SentMessageHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView message;
-        TextView time;
+        public TextView show_message;
 
-
-        public SentMessageHolder(@NonNull View itemView) {
+        public ViewHolder( View itemView) {
             super(itemView);
-            message = (TextView)itemView.findViewById(R.id.message);
-            time = (TextView)itemView.findViewById(R.id.time);
-
-        }
-
-        void bind(MessageChatModel messageModel) {
-            message.setText(messageModel.getText());
-            time.setText(messageModel.getTime());
-
+            show_message = itemView.findViewById(R.id.message);
         }
 
     }
 
-    private class ReceivedMessageHolder extends RecyclerView.ViewHolder{
-        TextView message;
-        TextView time;
-        public ReceivedMessageHolder(@NonNull View itemView) {
-            super(itemView);
-            message = (TextView)itemView.findViewById(R.id.message);
-            time = (TextView)itemView.findViewById(R.id.time);
-        }
 
-        void bind(MessageChatModel messageModel){
-            message.setText(messageModel.getText());
-            time.setText(messageModel.getTime());
-        }
-    }
 
 
 
