@@ -12,6 +12,6 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       tools:itemCount="10"
-      tools:listitem="@layout/item_view_of_lost_item" />
+      tools:listitem="@layout/item_view" />
 
 </FrameLayout>
