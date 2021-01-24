@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_weight="4"
     android:layout_margin="20dp"
+    android:layout_weight="4"
+    android:orientation="vertical"
     tools:context=".activities.EmergencyActivity">
 
     <Spinner
+        android:id="@+id/spinner_type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -21,12 +22,13 @@
         android:theme="@style/spinnerTheme" />
 
     <Spinner
+        android:id="@+id/spinner_cate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_weight="0.2"
         android:background="@color/colorPrimary"
-        android:entries="@array/Categories"
+        android:entries="@array/ItemCategories"
         android:popupBackground="@color/colorPrimary"
         android:spinnerMode="dropdown"
         android:theme="@style/spinnerTheme" />
@@ -43,6 +45,7 @@
         android:textStyle="bold" />
 
     <EditText
+        android:id="@+id/txt_message_emergency"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -53,6 +56,7 @@
         android:textColorHint="@color/colorPrimary" />
 
     <Button
+        android:id="@+id/send_emergency_btn"
         android:layout_width="135dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"

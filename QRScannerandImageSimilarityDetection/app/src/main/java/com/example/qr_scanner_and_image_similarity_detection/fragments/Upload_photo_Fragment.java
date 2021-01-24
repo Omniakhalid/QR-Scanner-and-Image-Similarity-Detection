@@ -43,7 +43,7 @@ public class Upload_photo_Fragment extends Fragment {
         Item_img = view.findViewById(R.id.uploadfrag_ItmImg);
         Categories_spiner = view.findViewById(R.id.UploadFrag_Categ_spinner);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.Categories, android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.ItemCategories, android.R.layout.simple_spinner_dropdown_item);
         Categories_spiner.setAdapter(adapter);
         Categories_spiner.setPrompt("Select Category");
 

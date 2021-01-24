@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ActivityOptions;
+import android.app.MediaRouteButton;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Pair;
@@ -18,6 +19,7 @@ import com.example.qr_scanner_and_image_similarity_detection.MainActivity;
 import com.example.qr_scanner_and_image_similarity_detection.R;
 import com.example.qr_scanner_and_image_similarity_detection.activities.HomeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -26,6 +28,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 public class SigninActivity extends AppCompatActivity {
     TextInputLayout email,pass;
@@ -113,6 +117,7 @@ public class SigninActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     if(FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()){
+                        UpdatePass();
                         SendToActivity(HomeActivity.class);
                     }
                     else {
@@ -127,6 +132,20 @@ public class SigninActivity extends AppCompatActivity {
             }
         });
     }
+
+    void UpdatePass() {
+        String usrpass = pass.getEditText().getText().toString().trim();
+        HashMap map = new HashMap();
+        map.put("password",usrpass);
+        databaseReference = FirebaseDatabase.getInstance().getReference("Users");
+        databaseReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).updateChildren(map).addOnSuccessListener(new OnSuccessListener() {
+            @Override
+            public void onSuccess(Object o) {
+                ShowMessage("Welcome");
+            }
+        });
+    }
+
     void SendToActivity(Class c){
         Intent i = new Intent(getApplicationContext(), c);
         startActivity(i);

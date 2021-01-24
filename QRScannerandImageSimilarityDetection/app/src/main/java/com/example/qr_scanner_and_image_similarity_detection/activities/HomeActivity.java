@@ -35,6 +35,7 @@ import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    public static final String QR_SCANNING_KEY="QR_SCANNING_KEY";
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;
     private ChipNavigationBar bottom_navigationBar;
@@ -125,7 +126,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 //scan is successful
                 Toast.makeText(HomeActivity.this, "Successful", Toast.LENGTH_SHORT).show();
                 //send QR data to emergency call activity..
-                openActivity(EmergencyActivity.class);
+                String res = result.getContents();
+                openActivityWithData(EmergencyActivity.class,QR_SCANNING_KEY,res);
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
@@ -210,5 +212,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     private void showMessage() {
         Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
+    }
+
+
+    private void openActivityWithData(Class c,String key , String value) {
+        Intent intent = new Intent(this,c);
+        intent.putExtra(key,value);
+        startActivity(intent);
     }
 }

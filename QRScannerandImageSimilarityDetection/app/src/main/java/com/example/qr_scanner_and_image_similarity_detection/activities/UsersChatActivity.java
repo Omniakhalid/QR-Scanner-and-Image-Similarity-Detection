@@ -52,8 +52,9 @@ public class UsersChatActivity extends AppCompatActivity {
                     User user = snapshot.getValue(User.class);
                     assert user != null;
                     assert firebaseUser != null;
-
-                        muser.add(user);
+                   if(!user.getUId().equals(firebaseUser.getUid())) {
+                       muser.add(user);
+                   }
                 }
                 usersChatAdapter=new UsersChatAdapter(UsersChatActivity.this,muser);
                     recyclerView.setAdapter(usersChatAdapter);

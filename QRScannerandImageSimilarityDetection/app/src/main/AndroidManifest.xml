@@ -43,12 +43,16 @@
         <activity android:name=".activities.ChatActivity" />
         <activity android:name=".FindOwner" />
         <activity android:name=".MapsActivity" />
+<<<<<<< HEAD
         <activity android:name=".activities.UsersChatActivity" />
 
         <activity android:name=".MainActivity">
+=======
+        <activity android:name=".MainActivity">
+
+>>>>>>> 68e1252f3348eb2969d21f8dceb1b552487b927e
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -60,11 +64,27 @@
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".activities.HomeActivity"
+<<<<<<< HEAD
             android:theme="@style/Theme.WithActionBar" />
+=======
+            android:theme="@style/Theme.WithActionBar"></activity>
+>>>>>>> 68e1252f3348eb2969d21f8dceb1b552487b927e
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
     </application>
+<<<<<<< HEAD
+=======
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+>>>>>>> 68e1252f3348eb2969d21f8dceb1b552487b927e
 
 </manifest>

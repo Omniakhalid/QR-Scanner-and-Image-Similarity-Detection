@@ -36,9 +36,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     private final int MiN_TIME = 10; //? sec
-    private final int MIN_DISTANCE = 0; //? meter
+    private final int MIN_DISTANCE = 0;
+    private LocationManager manager;//? meter
     private DatabaseReference reference;
-    private LocationManager manager;
     private Marker my_marker;
 
     @Override

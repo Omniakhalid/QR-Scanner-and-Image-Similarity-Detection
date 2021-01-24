@@ -6,17 +6,32 @@
     <string name="close">Close</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string-array name="Categories">
+
+    <string-array name="ItemCategories">
         <item>Select Category</item>
         <item>Mobiles</item>
         <item>Books</item>
         <item>HandFree</item>
         <item>AirPods</item>
     </string-array>
+
+    <string-array name="CarCategories">
+        <item>Select Type Of issue</item>
+        <item>Move Your Car  </item>
+        <item>Left Window open </item>
+        <item>someone hit your car</item>
+        <item>your car was broken</item>
+        <item>other issue</item>
+    </string-array>
+
     <string-array name="Emergency_type">
         <item>Select Type</item>
         <item>Item</item>
         <item>Car</item>
     </string-array>
+<<<<<<< HEAD
     <string name="title_activity_message">MessageActivity</string>
+=======
+
+>>>>>>> 68e1252f3348eb2969d21f8dceb1b552487b927e
 </resources>

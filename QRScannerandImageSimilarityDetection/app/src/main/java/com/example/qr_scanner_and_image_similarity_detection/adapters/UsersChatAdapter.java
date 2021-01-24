@@ -51,7 +51,7 @@ public class UsersChatAdapter extends RecyclerView.Adapter<UsersChatAdapter.View
         public void onClick(View view) {
 
             Intent intent=new Intent(mcontext, MessageActivity.class);
-            intent.putExtra("user_id",user.getName());
+            intent.putExtra("user_id",user.getUId());
             mcontext.startActivity(intent);
         }
     });
