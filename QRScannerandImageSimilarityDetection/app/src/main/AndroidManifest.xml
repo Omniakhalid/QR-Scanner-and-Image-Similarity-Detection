@@ -38,6 +38,8 @@
 
         <activity android:name=".FindOwner" />
         <activity android:name=".MapsActivity" />
+        <activity android:name=".MessageActivity" />
+        <activity android:name=".activities.UsersChatActivity" />
         <activity android:name=".MainActivity">
 
             <intent-filter>

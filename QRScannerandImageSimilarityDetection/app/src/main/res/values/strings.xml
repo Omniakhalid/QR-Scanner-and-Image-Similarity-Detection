@@ -29,9 +29,7 @@
         <item>Item</item>
         <item>Car</item>
     </string-array>
-<<<<<<< HEAD
-    <string name="title_activity_message">MessageActivity</string>
-=======
 
->>>>>>> 68e1252f3348eb2969d21f8dceb1b552487b927e
+    <string name="title_activity_message">MessageActivity</string>
+
 </resources>
