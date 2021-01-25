@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.qr_scanner_and_image_similarity_detection.R;
+import com.example.qr_scanner_and_image_similarity_detection.adapters.UsersChatAdapter;
 import com.example.qr_scanner_and_image_similarity_detection.models.User;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,6 +28,9 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ProfileActivity extends AppCompatActivity {
 
     EditText Name;
@@ -36,11 +40,25 @@ public class ProfileActivity extends AppCompatActivity {
     ImageView Qr_img;
     DatabaseReference reff;
     private FirebaseUser current_user;
+    private List<User> currenInfo;
+
+    String Gender="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        init();
+        current_user = FirebaseAuth.getInstance().getCurrentUser();
+        GenerateQR(current_user.getUid());
+
+        currenInfo=new ArrayList<>();
+        sentData();
+
+    }
+
+    private void init(){
 
         TextInputLayout NameEdt = findViewById(R.id.Pro_Name_edTxt);
         TextInputLayout PassEdt = findViewById(R.id.Pro_Pass_edTxt);
@@ -56,31 +74,6 @@ public class ProfileActivity extends AppCompatActivity {
         Phone = findViewById(R.id.NumberEditText);
         Email = findViewById(R.id.EmailEditText);
         Qr_img = findViewById(R.id.QR_Image);
-
-
-        current_user = FirebaseAuth.getInstance().getCurrentUser();
-        GenerateQR(current_user.getUid());
-
-        /*reff=  FirebaseDatabase.getInstance().getReference().child("Users").child("1");
-        reff.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String email=dataSnapshot.child("email").getValue().toString();
-                String name=dataSnapshot.child("name").getValue().toString();
-                String pass=dataSnapshot.child("password").getValue().toString();
-                String phone=dataSnapshot.child("phone").getValue().toString();
-
-                Name.setText(name);
-                Pass.setText(pass);
-                Phone.setText(phone);
-                Email.setText(email);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });*/
 
         NameEdt.setEnabled(false);
         PassEdt.setEnabled(false);
@@ -117,10 +110,49 @@ public class ProfileActivity extends AppCompatActivity {
                 PassEdt.setEnabled(false);
                 NumberEdt.setEnabled(false);
 
-               /* reff.child("Users").child("1").child("name").setValue(Name.getText());
-                reff.child("Users").child("1").child("password").setValue(Pass.getText());
-                reff.child("Users").child("1").child("phone").setValue(Phone.getText());
-                reff.child("Users").child("1").child("email").setValue(Email.getText());*/
+               /* User Updateuser=new User();
+                Updateuser.setEmail((String) Email.getText());
+                Updateuser.setGender(Gender);
+                Updateuser.setName(Name.getText().toString());
+                Updateuser.setPassword(Pass.getText().toString());
+                Updateuser.setPhone(Phone.getText().toString());
+                Updateuser.setUId(current_user.getUid());
+                reff.child("Users").child(current_user.getUid()).setValue(Phone.getText());*/
+
+            }
+        });
+    }
+
+    private void sentData() {
+        final FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference reference= FirebaseDatabase.getInstance().getReference("Users");
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                currenInfo.clear();
+                for(DataSnapshot snapshot:dataSnapshot.getChildren()) {
+                    User user = snapshot.getValue(User.class);
+                    assert user != null;
+                    assert firebaseUser != null;
+                    if(user.getUId().equals(firebaseUser.getUid())) {
+                        currenInfo.add(user);
+                    }
+                }
+                String email=currenInfo.get(0).getEmail();
+                String name=currenInfo.get(0).getName();
+                String pass=currenInfo.get(0).getPassword();
+                String phone=currenInfo.get(0).getPhone();
+                Gender=currenInfo.get(0).getGender();
+
+                Name.setText(name);
+                Pass.setText(pass);
+                Phone.setText(phone);
+                Email.setText(email);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });

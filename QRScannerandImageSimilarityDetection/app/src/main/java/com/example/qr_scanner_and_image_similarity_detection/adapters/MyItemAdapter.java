@@ -1,5 +1,8 @@
 package com.example.qr_scanner_and_image_similarity_detection.adapters;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.qr_scanner_and_image_similarity_detection.ItemCardClass;
 import com.example.qr_scanner_and_image_similarity_detection.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -46,9 +51,9 @@ public class MyItemAdapter extends RecyclerView.Adapter<MyItemAdapter.ExampleVie
     public void onBindViewHolder(@NonNull ExampleViewHolder holder, int position) {
         ItemCardClass currenProd =myExampleList.get(position);
         holder.myTextDisceaption.setText(currenProd.getDiscreaption());
-        holder.myTextCategory.setText(currenProd.getmCategory());
-        holder.Savebtn.setImageBitmap(currenProd.getImageSource());
-        holder.ItemIsLost.setChecked(currenProd.isItemLostSwitch());
+        holder.myTextCategory.setText("Category is : "+ currenProd.getCat_ID());
+        holder.Savebtn.setImageBitmap(decodeBase64(currenProd.getImageSource()));
+        holder.ItemIsLost.setChecked(currenProd.isItemLostchecked());
         holder.DeleteItem.setImageResource(currenProd.getDeleteItem());
 
     }
@@ -90,7 +95,8 @@ public class MyItemAdapter extends RecyclerView.Adapter<MyItemAdapter.ExampleVie
                     myExampleList.remove(position);
                     notifyDataSetChanged();
                     DatabaseReference reff;
-                    reff= FirebaseDatabase.getInstance().getReference().child("Items");
+                    FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
+                    reff= FirebaseDatabase.getInstance().getReference().child("Items").child(current_user.getUid());
                     reff.child(String.valueOf(position+1)).setValue(null);
                 }
             });
@@ -111,5 +117,10 @@ public class MyItemAdapter extends RecyclerView.Adapter<MyItemAdapter.ExampleVie
             });
 
         }
+    }
+    private Bitmap decodeBase64(String input){
+        byte[] decodedString = Base64.decode(input, Base64.DEFAULT);
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        return decodedByte;
     }
 }
