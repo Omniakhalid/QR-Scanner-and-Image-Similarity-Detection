@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,15 +19,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-
 import com.example.qr_scanner_and_image_similarity_detection.Capture;
-import com.example.qr_scanner_and_image_similarity_detection.activities.Myitems;
 import com.example.qr_scanner_and_image_similarity_detection.R;
 import com.example.qr_scanner_and_image_similarity_detection.activities.sign_in_up_activities.SigninActivity;
 import com.example.qr_scanner_and_image_similarity_detection.fragments.History_of_Movement_Fragment;
 import com.example.qr_scanner_and_image_similarity_detection.fragments.HomeFragment;
 import com.example.qr_scanner_and_image_similarity_detection.fragments.Reminder_Item_Fragment;
-import com.example.qr_scanner_and_image_similarity_detection.fragments.Scan_Qr_Fragment;
 import com.example.qr_scanner_and_image_similarity_detection.fragments.Upload_photo_Fragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,13 +34,13 @@ import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    public static final String QR_SCANNING_KEY="QR_SCANNING_KEY";
+    public static final String QR_SCANNING_KEY = "QR_SCANNING_KEY";
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;
     private ChipNavigationBar bottom_navigationBar;
     private FragmentTransaction transaction;
     private NavigationView nav_view;
-
+    private Switch switch_id;
     private FirebaseAuth auth;
 
     @Override
@@ -67,8 +66,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-         getMenuInflater().inflate(R.menu.menu_chat,menu);
-         return true;
+        getMenuInflater().inflate(R.menu.menu_chat, menu);
+        return true;
     }
 
     private void openNav_Bottom(int i) {
@@ -99,7 +98,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void openActivity(Class c) {
-        Intent intent = new Intent(this,c);
+        Intent intent = new Intent(this, c);
         startActivity(intent);
     }
 
@@ -127,7 +126,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(HomeActivity.this, "Successful", Toast.LENGTH_SHORT).show();
                 //send QR data to emergency call activity..
                 String res = result.getContents();
-                openActivityWithData(EmergencyActivity.class,QR_SCANNING_KEY,res);
+                openActivityWithData(EmergencyActivity.class, QR_SCANNING_KEY, res);
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
@@ -145,7 +144,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void Init() {
-
         auth = FirebaseAuth.getInstance();
 
         drawerLayout = findViewById(R.id.nav_drawer);
@@ -171,14 +169,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         if (toggle.onOptionsItemSelected(item)) {
             return true;
         }
-        if (id==R.id.menu_chat_icon){
+        if (id == R.id.menu_chat_icon) {
             showChat();
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    void showChat(){
+    void showChat() {
 
         Intent intent = new Intent(this, UsersChatActivity.class);
         startActivity(intent);
@@ -187,7 +185,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.nav_drawer_profile:
                 openActivity(ProfileActivity.class);
                 break;
@@ -200,24 +198,29 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 openActivity(Myitems.class);
                 break;
             case R.id.nav_drawer_tracking:
-                Toast.makeText(this, "Tracking Enabled", Toast.LENGTH_SHORT).show();
+                switch_id = findViewById(R.id.Switch_id);
+                if (switch_id.isChecked()) {
+                    switch_id.setChecked(false);
+                    showMessage("Disable Tracking");
+                } else {
+                    switch_id.setChecked(true);
+                    showMessage("Enable Tracking");
+                }
                 break;
-
         }
-
-        showMessage();
-        drawerLayout.closeDrawer(GravityCompat.START,true);
+        //showMessage("Done");
+        drawerLayout.closeDrawer(GravityCompat.START, true);
         return false;
     }
 
-    private void showMessage() {
-        Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
+    private void showMessage(String S) {
+        Toast.makeText(getApplicationContext(), S, Toast.LENGTH_SHORT).show();
     }
 
 
-    private void openActivityWithData(Class c,String key , String value) {
-        Intent intent = new Intent(this,c);
-        intent.putExtra(key,value);
+    private void openActivityWithData(Class c, String key, String value) {
+        Intent intent = new Intent(this, c);
+        intent.putExtra(key, value);
         startActivity(intent);
     }
 }
