@@ -56,7 +56,7 @@ public class UsersChatActivity extends AppCompatActivity {
                        muser.add(user);
                    }
                 }
-                usersChatAdapter=new UsersChatAdapter(UsersChatActivity.this,muser);
+                usersChatAdapter=new UsersChatAdapter(UsersChatActivity.this,muser,false);
                     recyclerView.setAdapter(usersChatAdapter);
 
             }

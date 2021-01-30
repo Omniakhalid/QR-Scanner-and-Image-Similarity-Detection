@@ -23,6 +23,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -37,20 +41,19 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MessageActivity extends AppCompatActivity {
-   CircleImageView profil_image;
-   TextView username;
-   FirebaseUser fuser;
-   DatabaseReference reference;
-   Intent intent;
+    CircleImageView profil_image;
+    TextView username;
+    FirebaseUser fuser;
+    DatabaseReference reference;
+    Intent intent;
+    private boolean inBed = false;
 
+    ImageView btn_send;
+    EditText message;
 
-   ImageView btn_send;
-   EditText message;
-
-   MessageChatAdapter messageChatAdapter;
-   List<MessageChatModel> mchat;
-   RecyclerView recyclerView;
-
+    MessageChatAdapter messageChatAdapter;
+    List<MessageChatModel> mchat;
+    RecyclerView recyclerView;
 
 
     @Override
@@ -58,6 +61,8 @@ public class MessageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
 
+        ImageView menublock = (ImageView) findViewById(R.id.optionmenu);
+        registerForContextMenu(menublock);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
@@ -69,36 +74,31 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
         //my code
-        recyclerView=findViewById(R.id.recycler_view);
+        recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getApplicationContext());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
 
 
+        profil_image = findViewById(R.id.prfile_image1);
+        username = findViewById(R.id.username1);
+        btn_send = findViewById(R.id.sendBtn1);
+        message = findViewById(R.id.messageET1);
 
+        intent = getIntent();
+        String usrerid = intent.getStringExtra("user_id");
 
-        profil_image =findViewById(R.id.prfile_image1);
-        username=findViewById(R.id.username1);
-        btn_send=findViewById(R.id.sendBtn1);
-        message=findViewById(R.id.messageET1);
-
-        intent=getIntent();
-        String usrerid=intent.getStringExtra("user_id");
-
-        fuser= FirebaseAuth.getInstance().getCurrentUser();
+        fuser = FirebaseAuth.getInstance().getCurrentUser();
         btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String messag=message.getText().toString();
-                if(!messag.equals(""))
-                {
-                    sendMessage(fuser.getUid(),usrerid,messag);
+                String messag = message.getText().toString();
+                if (!messag.equals("")) {
+                    sendMessage(fuser.getUid(), usrerid, messag);
 
-                }
-                else
-                {
-                    Toast.makeText(getApplicationContext(),"you cant send empty message",Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "you cant send empty message", Toast.LENGTH_LONG).show();
                 }
                 message.setText("");
 
@@ -106,19 +106,17 @@ public class MessageActivity extends AppCompatActivity {
         });
 
 
-
-
-        reference= FirebaseDatabase.getInstance().getReference("Users").child(usrerid);
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(usrerid);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-              User user=dataSnapshot.getValue(User.class);
-              //user.getname();
-              username.setText(user.getName());
-              profil_image.setImageResource(R.drawable.images);
+                User user = dataSnapshot.getValue(User.class);
+                //user.getname();
+                username.setText(user.getName());
+                profil_image.setImageResource(R.drawable.images);
 
-              readMessage(fuser.getUid(),usrerid);
+                readMessage(fuser.getUid(), usrerid);
             }
 
             @Override
@@ -130,49 +128,60 @@ public class MessageActivity extends AppCompatActivity {
     }
 
 
+    private void sendMessage(String sender, String reciver, String message) {
 
-    private void sendMessage(String sender,String reciver,String message){
-
-        DatabaseReference reference=FirebaseDatabase.getInstance().getReference();
-        HashMap<String,Object> hashMap=new HashMap<>();
-        hashMap.put("sender",sender);
-        hashMap.put("reciver",reciver);
-        hashMap.put("message",message);
-
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("sender", sender);
+        hashMap.put("reciver", reciver);
+        hashMap.put("message", message);
 
 
         reference.child("Chat").push().setValue(hashMap);
 
     }
 
-    private void readMessage( String userid, String recivername)
-    {
-      mchat=new ArrayList<>();
-      reference=FirebaseDatabase.getInstance().getReference("Chat");
-      reference.addValueEventListener(new ValueEventListener() {
-          @Override
-          public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-              mchat.clear();
-              for(DataSnapshot snapshot:dataSnapshot.getChildren())
-              {
-                  MessageChatModel chat=snapshot.getValue(MessageChatModel.class);
-                  assert chat != null;
-                  if(chat.getReciver().equals(userid)&& chat.getSender().equals(recivername)||
-                       chat.getReciver().equals(recivername)&&chat.getSender().equals(userid)) {
-                      mchat.add(chat);
-                  }
-                  messageChatAdapter=new MessageChatAdapter(mchat, MessageActivity.this);
-                  recyclerView.setAdapter(messageChatAdapter);
-              }
-          }
+    private void readMessage(String userid, String recivername) {
+        mchat = new ArrayList<>();
+        reference = FirebaseDatabase.getInstance().getReference("Chat");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mchat.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    MessageChatModel chat = snapshot.getValue(MessageChatModel.class);
+                    assert chat != null;
+                    if (chat.getReciver().equals(userid) && chat.getSender().equals(recivername) ||
+                            chat.getReciver().equals(recivername) && chat.getSender().equals(userid)) {
+                        mchat.add(chat);
+                    }
+                    messageChatAdapter = new MessageChatAdapter(mchat, MessageActivity.this);
+                    recyclerView.setAdapter(messageChatAdapter);
+                }
+            }
 
-          @Override
-          public void onCancelled(@NonNull DatabaseError databaseError) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-          }
-      });
+            }
+        });
 
 
     }
 
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        MenuInflater inflater = new MenuInflater(this);
+        inflater.inflate(R.menu.contextblock, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.block:
+        }
+        return false;
+
+    }
 }

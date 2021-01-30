@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -20,6 +22,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.qr_scanner_and_image_similarity_detection.Capture;
+import com.example.qr_scanner_and_image_similarity_detection.MychatsActivity;
+import com.example.qr_scanner_and_image_similarity_detection.activities.Myitems;
 import com.example.qr_scanner_and_image_similarity_detection.R;
 import com.example.qr_scanner_and_image_similarity_detection.activities.sign_in_up_activities.SigninActivity;
 import com.example.qr_scanner_and_image_similarity_detection.fragments.History_of_Movement_Fragment;
@@ -42,6 +46,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView nav_view;
     private Switch switch_id;
     private FirebaseAuth auth;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -178,7 +185,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     void showChat() {
 
-        Intent intent = new Intent(this, UsersChatActivity.class);
+        Intent intent = new Intent(this, MychatsActivity.class);
         startActivity(intent);
     }
 
@@ -223,4 +230,16 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         intent.putExtra(key, value);
         startActivity(intent);
     }
+
+    private void status(String Status){
+
+
+    }
+
+
+
+
+
+
+
 }

@@ -10,8 +10,19 @@ public class User {
     private String Password;
     private String Phone;
     private String Gender;
+    private String Status;
+
 
     public User() {
+    }
+
+
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String status) {
+        Status = status;
     }
 
     public String getUId() {

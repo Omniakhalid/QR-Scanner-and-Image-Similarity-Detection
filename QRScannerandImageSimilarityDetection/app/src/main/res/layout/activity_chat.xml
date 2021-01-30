@@ -34,6 +34,15 @@
                     android:tint="#4a4a4a">
 
                 </ImageView>
+                <ImageView
+                    android:id="@+id/optionmenu"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:src="@drawable/menu64"
+                    android:tint="#4a4a4a">
+
+                </ImageView>
 
                 <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/profile_image"
@@ -63,15 +72,7 @@
                     android:layout_height="match_parent"
                     android:gravity="end">
 
-                    <ImageView
-                        android:id="@+id/optionmenu"
-                        android:layout_width="40dp"
-                        android:layout_height="match_parent"
-                        android:padding="10dp"
-                        android:src="@drawable/menu64"
-                        android:tint="#4a4a4a">
 
-                    </ImageView>
                 </LinearLayout>
 
 

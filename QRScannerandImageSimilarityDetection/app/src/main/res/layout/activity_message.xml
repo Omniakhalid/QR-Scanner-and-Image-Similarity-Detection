@@ -16,19 +16,28 @@
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
             <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
                 android:id="@+id/prfile_image1"
-                />
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+
             <TextView
+                android:id="@+id/username1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/username1"
-                android:textSize="18dp"
                 android:layout_marginLeft="25dp"
                 android:textColor="#fff"
-                />
+                android:textSize="18dp" />
+
+            <ImageView
+                android:id="@+id/optionmenu"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:layout_marginLeft="150dp"
+                android:src="@drawable/blockuser">
+            </ImageView>
 
         </androidx.appcompat.widget.Toolbar>
 
