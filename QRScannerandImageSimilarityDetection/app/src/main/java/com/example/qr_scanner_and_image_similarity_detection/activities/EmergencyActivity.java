@@ -14,6 +14,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.qr_scanner_and_image_similarity_detection.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 import static com.example.qr_scanner_and_image_similarity_detection.activities.HomeActivity.QR_SCANNING_KEY;
 
@@ -26,6 +31,8 @@ public class EmergencyActivity extends AppCompatActivity {
     private ArrayAdapter<CharSequence> adapter;
     private String StandardMessage = "";
     private String USER_ID;
+    FirebaseUser fuser;
+    EditText message1;
 
 
     @Override
@@ -94,14 +101,26 @@ public class EmergencyActivity extends AppCompatActivity {
             }
         });
 
+        fuser = FirebaseAuth.getInstance().getCurrentUser();
+        message1 = findViewById(R.id.txt_message_emergency);
         sendEmergency_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 int position = spinner_type.getSelectedItemPosition();
                 if (position != 0) {
                     String message = TextEmergency.getText().toString();
                     if (!message.isEmpty()) {
                         ShowMessage(USER_ID);
+                        String messag = message1.getText().toString();
+                        if (!messag.equals("")) {
+                            sendMessage(fuser.getUid(), USER_ID, messag);
+
+                        } else {
+                            Toast.makeText(getApplicationContext(), "you cant send empty message", Toast.LENGTH_LONG).show();
+                        }
+                        message1.setText("");
+
                         ShowMessage("Done ");
                     } else {
                         ShowMessage("Please, write Message ");
@@ -138,6 +157,19 @@ public class EmergencyActivity extends AppCompatActivity {
         sendEmergency_btn = findViewById(R.id.send_emergency_btn);
         USER_ID = getIntent().getStringExtra(QR_SCANNING_KEY);
         spinner_category.setEnabled(false);
+    }
+
+    private void sendMessage(String sender, String reciver, String message) {
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("sender", sender);
+        hashMap.put("reciver", reciver);
+        hashMap.put("message", message);
+
+
+        reference.child("Chat").push().setValue(hashMap);
+
     }
 
 
