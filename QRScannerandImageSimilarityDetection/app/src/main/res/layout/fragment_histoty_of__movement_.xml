@@ -4,13 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="4dp"
+    android:background="#f0f0f0"
     tools:context=".fragments.History_of_Movement_Fragment">
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/frag_history_rv"
         android:layout_width="match_parent"
-        android:layout_height="618dp"
+        android:layout_height="match_parent"
         tools:itemCount="6" />
 
 </FrameLayout>

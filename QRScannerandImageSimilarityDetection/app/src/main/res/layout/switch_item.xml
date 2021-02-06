@@ -4,8 +4,9 @@
     android:layout_height="match_parent">
 
     <Switch
-        android:id="@+id/Switch_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:id="@+id/tracking_switch"/>
 </RelativeLayout>
