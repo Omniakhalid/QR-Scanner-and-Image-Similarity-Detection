@@ -30,15 +30,6 @@
                 android:textColor="#fff"
                 android:textSize="18dp" />
 
-            <ImageView
-                android:id="@+id/optionmenu"
-                android:layout_width="40dp"
-                android:layout_height="match_parent"
-                android:padding="10dp"
-                android:layout_marginLeft="150dp"
-                android:src="@drawable/blockuser">
-            </ImageView>
-
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -80,9 +71,16 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:padding="5dp"
-            android:src="@drawable/send"
-            android:tint="@color/colorPrimaryDark" />
+            android:src="@drawable/send" />
+
 
     </LinearLayout>
+    <ImageView
+        android:id="@+id/unblockid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+
+        app:srcCompat="@drawable/unblock" />
 
 </RelativeLayout>

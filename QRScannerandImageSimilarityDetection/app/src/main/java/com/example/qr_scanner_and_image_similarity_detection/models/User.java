@@ -11,18 +11,10 @@ public class User {
     private String Phone;
     private String Gender;
     private String Status;
+    private boolean BlockUser;
 
 
     public User() {
-    }
-
-
-    public String getStatus() {
-        return Status;
-    }
-
-    public void setStatus(String status) {
-        Status = status;
     }
 
     public String getUId() {
@@ -73,4 +65,19 @@ public class User {
         Gender = gender;
     }
 
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String status) {
+        Status = status;
+    }
+
+    public boolean isBlockUser() {
+        return BlockUser;
+    }
+
+    public void setBlockUser(boolean blockUser) {
+        BlockUser = blockUser;
+    }
 }
