@@ -19,7 +19,7 @@ public class Reminder {
         this.itemId = itemId;
         this.userId = userId;
     }
-    List<String>  getItemsName() {
+    public List<String>  getItemsName() {
         return itemsName;
     }
 

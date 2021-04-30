@@ -1,6 +1,8 @@
 package com.example.qr_scanner_and_image_similarity_detection.activities;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +28,7 @@ public class UsersChatActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private UsersChatAdapter usersChatAdapter;
     private List<User> muser;
+    private TextView emptyView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +36,21 @@ public class UsersChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_userschat);
 
         recyclerView=findViewById(R.id.userrecycler);
+        emptyView =  findViewById(R.id.empty_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         muser=new ArrayList<>();
-        readUsers();
+        if (usersChatAdapter.getItemCount()==0) {
+            recyclerView.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+        }
+        else {
+            recyclerView.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
+            readUsers();
+
+        }
+
 
     }
 

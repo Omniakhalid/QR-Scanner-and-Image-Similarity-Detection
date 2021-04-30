@@ -58,8 +58,7 @@ public class UsersChatAdapter extends RecyclerView.Adapter<UsersChatAdapter.View
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
         User user=muser.get(position);
-    //problem
-        //user.getname();
+
     holder.Username.setText(user.getName());
     holder.profile_image.setImageResource(R.drawable.images);
    //to move to chat activity
@@ -100,8 +99,7 @@ public class UsersChatAdapter extends RecyclerView.Adapter<UsersChatAdapter.View
 
     }
 
-    private void inBlockedOrNot(String hisUid)
-    {
+    private void inBlockedOrNot(String hisUid) {
         DatabaseReference ref=FirebaseDatabase.getInstance().getReference("Users");
         ref.child(hisUid).child("BlockedUsers").orderByChild("uid").equalTo(myUserId)
                 .addValueEventListener(new ValueEventListener() {
@@ -154,8 +152,7 @@ public class UsersChatAdapter extends RecyclerView.Adapter<UsersChatAdapter.View
 
     }
 
-    public void Block(String hisId)
-    {
+    public void Block(String hisId) {
         HashMap<String,String> hashMap=new HashMap<>();
         hashMap.put("uid",hisId);
 
@@ -176,8 +173,7 @@ public class UsersChatAdapter extends RecyclerView.Adapter<UsersChatAdapter.View
         });
     }
 
-    private  void unBlock(String hisuid)
-    {
+    private  void unBlock(String hisuid) {
         DatabaseReference ref=FirebaseDatabase.getInstance().getReference("Users");
         ref.child(myUserId).child("BlockedUsers").orderByChild("uid").equalTo(hisuid)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -209,7 +205,6 @@ public class UsersChatAdapter extends RecyclerView.Adapter<UsersChatAdapter.View
                     }
                 });
     }
-
 
     @Override
     public int getItemCount() {

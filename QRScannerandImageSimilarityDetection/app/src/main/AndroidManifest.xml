@@ -54,6 +54,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.EmergencyActivity" />
+        <receiver android:name=".activities.AlarmReceiver" />
         <activity
             android:name=".Capture"
             android:screenOrientation="fullSensor"

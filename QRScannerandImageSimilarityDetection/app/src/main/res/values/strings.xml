@@ -32,5 +32,6 @@
 
     <string name="title_activity_message">MessageActivity</string>
     <string name="title_activity_mychats">MychatsActivity</string>
+    <string name="no_data_available">sorry</string>
 
 </resources>

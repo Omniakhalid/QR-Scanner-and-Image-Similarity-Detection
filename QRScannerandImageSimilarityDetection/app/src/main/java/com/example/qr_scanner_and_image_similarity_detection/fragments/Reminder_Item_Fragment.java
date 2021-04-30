@@ -1,6 +1,9 @@
 package com.example.qr_scanner_and_image_similarity_detection.fragments;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
@@ -19,6 +22,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.example.qr_scanner_and_image_similarity_detection.R;
+import com.example.qr_scanner_and_image_similarity_detection.activities.AlarmReceiver;
 import com.example.qr_scanner_and_image_similarity_detection.models.Reminder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -30,15 +34,23 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import static android.content.Context.ALARM_SERVICE;
+
 
 public class Reminder_Item_Fragment extends Fragment {
     int hours,minuits;
     DatabaseReference databaseReminder;
-    private List<String> itemlist=new ArrayList<>();
+     List<String> itemlist=new ArrayList<>();
+    private int notificationId = 1;
+
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         // Inflate the layout for this fragment
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_reminder__item_, container, false);
        //******************************************************************************************
@@ -49,6 +61,17 @@ public class Reminder_Item_Fragment extends Fragment {
         settime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Intent
+                Intent intent = new Intent(getContext(), AlarmReceiver.class);
+                intent.putExtra("notificationId", notificationId);
+
+                // PendingIntent
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                        getContext(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT
+                );
+
+                // AlarmManager
+                AlarmManager alarmManager = (AlarmManager)getActivity().getSystemService(ALARM_SERVICE);
                 TimePickerDialog set_timePicker=new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
@@ -56,7 +79,26 @@ public class Reminder_Item_Fragment extends Fragment {
                         minuits=minute;
                         Calendar calendar= Calendar.getInstance();
                         calendar.set(0,0,0,hours,minuits);
+                        long alarmStartTime = calendar.getTimeInMillis();
                         settimetext.setText(DateFormat.format("hh:mm aa",calendar));
+                        // Intent
+                        Intent intent = new Intent(getContext(), AlarmReceiver.class);
+                        intent.putExtra("notificationId", notificationId);
+
+                        // PendingIntent
+                        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                                getContext(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT
+                        );
+
+                        // AlarmManager
+                        AlarmManager alarmManager = (AlarmManager)getActivity().getSystemService(ALARM_SERVICE);
+
+                        // Set Alarm
+                        alarmManager.set(AlarmManager.RTC_WAKEUP,alarmStartTime , pendingIntent);
+
+                        //
+                        Toast.makeText(getContext(), "Alarm done!", Toast.LENGTH_SHORT).show();
+
 
                     }
                 },12,0,false
@@ -73,6 +115,7 @@ public class Reminder_Item_Fragment extends Fragment {
         final ArrayAdapter<String> myadapter=new ArrayAdapter<String>(getActivity(),R.layout.custom_text
         );
         addtextlist.setAdapter(myadapter);
+
         //add object button to list
         ImageView add_object= (ImageView)root.findViewById(R.id.addObject);
         add_object.setOnClickListener(new View.OnClickListener() {
@@ -100,6 +143,7 @@ public class Reminder_Item_Fragment extends Fragment {
             }
         });
         //*****************************************************************************************************
+
        Button save=(Button)root.findViewById(R.id.save);
        save.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -119,21 +163,17 @@ public class Reminder_Item_Fragment extends Fragment {
                     Toast.makeText(getActivity(), "please set your return time or add your items", Toast.LENGTH_LONG).show();
                 }
                 else{
+
                     Reminder reminder=new Reminder(remId,currentTime,endTime,itemlist,"0",fuser.getUid());
                     databaseReminder.child(remId).setValue(reminder);
                     myadapter.clear();
                     itemlist.clear();
                     settimetext.setText("Set your return time.");
-
+                    Toast.makeText(getContext(), "save!", Toast.LENGTH_SHORT).show();
                 }
-
-
-
 
            }
        });
-
-
 
         return root;
 
