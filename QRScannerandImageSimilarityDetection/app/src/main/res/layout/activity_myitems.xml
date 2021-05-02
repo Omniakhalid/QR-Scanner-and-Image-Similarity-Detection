@@ -104,6 +104,7 @@
             android:layout_marginRight="227dp"
             android:layout_marginBottom="40dp"
             android:background="@color/colorPrimary"
+            android:popupBackground="@color/colorPrimary"
             android:entries="@array/ItemCategories"
             android:spinnerMode="dropdown"
             android:theme="@style/spinnerTheme" />

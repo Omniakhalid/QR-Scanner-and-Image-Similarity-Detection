@@ -30,6 +30,7 @@ public class MyItemAdapter extends RecyclerView.Adapter<MyItemAdapter.ExampleVie
 
     public interface OnItemClickListener {
         void onMarkedClick(int position);
+        void onMarkedDeleted(int position);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -111,7 +112,14 @@ public class MyItemAdapter extends RecyclerView.Adapter<MyItemAdapter.ExampleVie
                                 listener.onMarkedClick(postion);
                             }
                         }
-
+                    }
+                    else {
+                        if(listener !=null){
+                            int postion=getAdapterPosition();
+                            if(postion !=RecyclerView.NO_POSITION){
+                                listener.onMarkedDeleted(postion);
+                            }
+                        }
                     }
                 }
             });

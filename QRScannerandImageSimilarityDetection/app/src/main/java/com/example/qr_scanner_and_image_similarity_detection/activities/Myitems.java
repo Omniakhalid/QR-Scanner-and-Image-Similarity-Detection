@@ -29,6 +29,7 @@ import android.widget.Toast;
 import com.example.qr_scanner_and_image_similarity_detection.ItemCardClass;
 import com.example.qr_scanner_and_image_similarity_detection.adapters.MyItemAdapter;
 import com.example.qr_scanner_and_image_similarity_detection.R;
+import com.example.qr_scanner_and_image_similarity_detection.models.LostPosts;
 import com.example.qr_scanner_and_image_similarity_detection.models.Lost_ItemClass;
 import com.example.qr_scanner_and_image_similarity_detection.models.User;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -71,12 +72,16 @@ public class Myitems extends AppCompatActivity {
 
     DatabaseReference reff;
     DatabaseReference reffLOstitem;
+    DatabaseReference reffPosts;
 
     private  DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference().child("Items").child(current_user.getUid());
     private StorageReference mStorage;
     Uri uri;
 
     private ProgressDialog Loadingbar;
+
+    List<String> LostitemImage = new ArrayList<>();
+    List<String> LostitemDedcript = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +94,7 @@ public class Myitems extends AppCompatActivity {
         Loadingbar.setCanceledOnTouchOutside(true);
         Loadingbar.show();
         reff= FirebaseDatabase.getInstance().getReference().child("Items");
-        mStorage=FirebaseStorage.getInstance().getReference("Images");
+        mStorage=FirebaseStorage.getInstance().getReference().child("Images");
         init();
         builtRecycler();
 
@@ -109,7 +114,7 @@ public class Myitems extends AppCompatActivity {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         // Get a URL to the uploaded content
-                       // Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                        // Uri downloadUrl = taskSnapshot.getDownloadUrl();
                         Toast.makeText(Myitems.this,"Upload Done",Toast.LENGTH_LONG).show();
                     }
                 })
@@ -118,6 +123,7 @@ public class Myitems extends AppCompatActivity {
                     public void onFailure(@NonNull Exception exception) {
                         // Handle unsuccessful uploads
                         // ...
+                        Toast.makeText(Myitems.this, exception.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -137,20 +143,19 @@ public class Myitems extends AppCompatActivity {
                 if( !(cateSpin.getSelectedItem().toString().equals("Select Category")&&decre.getText().toString().equals("")&& itmImag.getTag().toString().equalsIgnoreCase("0")) ){
 
                     item_id=ItemList.size();
-                ItemCardClass NewItem=new ItemCardClass();
-                NewItem.setDiscreaption(decre.getText().toString());
-                NewItem.setImageSource(encodeTobase64(bitmap));
-                //NewItem.setCat_ID(String.valueOf(cateSpin.getSelectedItemPosition()));
-                NewItem.setCat_ID(cateSpin.getSelectedItem().toString());
-                NewItem.setItemLostchecked(false);
-                NewItem.setDeleteItem(R.drawable.ic_delete_icon);
+                    ItemCardClass NewItem=new ItemCardClass();
+                    NewItem.setDiscreaption(decre.getText().toString());
+                    NewItem.setImageSource(encodeTobase64(bitmap));
+                    //NewItem.setCat_ID(String.valueOf(cateSpin.getSelectedItemPosition()));
+                    NewItem.setCat_ID(cateSpin.getSelectedItem().toString());
+                    NewItem.setItemLostchecked(false);
+                    NewItem.setDeleteItem(R.drawable.ic_delete_icon);
                     reff.child(current_user.getUid()).child(String.valueOf(item_id+1)).setValue(NewItem);
 
-                ItemList.add(NewItem);
-                myResAdapter.notifyDataSetChanged();
-                Toast.makeText(Myitems.this,"One Item Added",Toast.LENGTH_LONG).show();
-
-                imageUpload();}
+                    ItemList.add(NewItem);
+                    myResAdapter.notifyDataSetChanged();
+                    Toast.makeText(Myitems.this,"One Item Added",Toast.LENGTH_LONG).show();
+                }
                 else
                     Toast.makeText(Myitems.this,"Please Enter your All Data",Toast.LENGTH_LONG).show();
 
@@ -179,7 +184,9 @@ public class Myitems extends AppCompatActivity {
                 for(DataSnapshot ds:dataSnapshot.getChildren())
                 {
                     ItemCardClass data=ds.getValue(ItemCardClass.class);
-                        ItemList.add(data);
+                    LostitemImage.add(data.getImageSource());
+                    LostitemDedcript.add(data.getDiscreaption());
+                    ItemList.add(data);
                 }
 
                 myResAdapter.notifyDataSetChanged();
@@ -198,18 +205,35 @@ public class Myitems extends AppCompatActivity {
                 AddLostItem(position);
             }
 
+            @Override
+            public void onMarkedDeleted(int position) {
+                reff.child(current_user.getUid()).child(String.valueOf(position+1)).child("itemLostchecked").setValue(false);
+            }
+
         });
     }
 
     private void AddLostItem(int position) {
 
         String id=current_user.getUid();
-       Lost_ItemClass myLostitem;
+        Lost_ItemClass myLostitem;
         myLostitem=new Lost_ItemClass();
         myLostitem.setItem_ID(position+1);
         myLostitem.setUser_ID(id);
         reffLOstitem= FirebaseDatabase.getInstance().getReference().child("LostItems");
         reffLOstitem.push().setValue(myLostitem);
+
+        reff.child(current_user.getUid()).child(String.valueOf(position+1)).child("itemLostchecked").setValue(true);
+
+        LostPosts LostImage;
+        LostImage=new LostPosts();
+        LostImage.setImage_Lostim(LostitemImage.get(position));
+        LostImage.setDiscreaption_LostItm(LostitemDedcript.get(position));
+        LostImage.setChatIcon(R.drawable.ic_chat);
+        LostImage.setUser_ID(id);
+        reffPosts=FirebaseDatabase.getInstance().getReference().child("Posts");
+        reffPosts.push().setValue(LostImage);
+
         Toast.makeText(Myitems.this,"you Mark this item as A lost item",Toast.LENGTH_LONG).show();
 
     }
@@ -236,7 +260,7 @@ public class Myitems extends AppCompatActivity {
                 bitmap = BitmapFactory.decodeStream(inputStream);
                 itmImag.setImageBitmap(bitmap);
                 itmImag.setTag("UpdatedTag");
-                
+
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
