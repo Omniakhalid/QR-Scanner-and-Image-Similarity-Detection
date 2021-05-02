@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.qr_scanner_and_image_similarity_detection.R;
 import com.example.qr_scanner_and_image_similarity_detection.adapters.RV_itemLost_Adapter;
 import com.example.qr_scanner_and_image_similarity_detection.models.LostPosts;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,6 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -32,6 +35,7 @@ public class HomeFragment extends Fragment {
 
     private ArrayList<LostPosts>list;
     //private List<String> usersID;
+    FirebaseUser fuser;
 
     private DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Posts");
     @NonNull
@@ -67,14 +71,31 @@ public class HomeFragment extends Fragment {
         adapter.setOnItemClickListener(new RV_itemLost_Adapter.OnItemClickListener() {
             @Override
             public void onClickSendMes(int position) {
-                OpenChatWithThisUser(position);
+                fuser = FirebaseAuth.getInstance().getCurrentUser();
+                String reciveUserId= list.get(position).getUser_ID();
+                sendMessage(fuser.getUid(), reciveUserId, "Hello Dear, i found this item, i think it belong to you.");
+
             }
         });
 
         return root;
     }
+    private void sendMessage(String sender, String reciver, String message) {
 
-    private void OpenChatWithThisUser(int position) {
-        String reciveUserId= list.get(position).getUser_ID();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("sender", sender);
+        hashMap.put("reciver", reciver);
+        hashMap.put("message", message);
+
+
+        reference.child("Chat").push().setValue(hashMap);
+
     }
+
+
+
+
+
+
 }
