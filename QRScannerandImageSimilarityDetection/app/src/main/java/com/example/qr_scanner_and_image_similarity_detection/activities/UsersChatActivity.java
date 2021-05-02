@@ -40,6 +40,7 @@ public class UsersChatActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         muser=new ArrayList<>();
+
         if (usersChatAdapter.getItemCount()==0) {
             recyclerView.setVisibility(View.GONE);
             emptyView.setVisibility(View.VISIBLE);
