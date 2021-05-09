@@ -1,10 +1,12 @@
 package com.example.qr_scanner_and_image_similarity_detection.activities;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,7 +39,7 @@ public class ProfileActivity extends AppCompatActivity {
     EditText Pass;
     EditText Phone;
     TextView Email;
-    ImageView Qr_img;
+    ImageButton Qr_img;
     DatabaseReference reff;
     private FirebaseUser current_user;
     private List<User> currenInfo;
@@ -51,7 +53,6 @@ public class ProfileActivity extends AppCompatActivity {
 
         init();
         current_user = FirebaseAuth.getInstance().getCurrentUser();
-        GenerateQR(current_user.getUid());
 
         currenInfo=new ArrayList<>();
         sentData();
@@ -78,6 +79,17 @@ public class ProfileActivity extends AppCompatActivity {
         NameEdt.setEnabled(false);
         PassEdt.setEnabled(false);
         NumberEdt.setEnabled(false);
+
+
+        Qr_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),DownloadImageActivity.class);
+                intent.putExtra("userid",current_user.getUid());
+                startActivity(intent);
+            }
+        });
+
 
         EditNameButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,17 +170,5 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
-    void GenerateQR(String id) {
-        MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
-        try {
-            BitMatrix bitMatrix = multiFormatWriter.encode(id, BarcodeFormat.QR_CODE, 500, 500);
-            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
-            Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
-            Qr_img.setImageBitmap(bitmap);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
 }

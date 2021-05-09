@@ -163,13 +163,14 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="30dp"/>
 
-        <ImageView
+        <ImageButton
             android:id="@+id/QR_Image"
-            android:layout_width="197dp"
-            android:layout_height="107dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:scaleType="fitCenter"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
-            app:srcCompat="@drawable/qr_code" />
+            android:src="@drawable/qr" />
     </LinearLayout>
 
     <Button

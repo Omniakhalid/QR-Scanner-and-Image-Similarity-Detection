@@ -18,7 +18,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.QRScannerandImageSimilarityDetection">
-        <activity android:name=".activities.CropImage.CropPhotoActivity" android:theme="@style/Theme.WithActionBar" android:label="Crop Photo"></activity>
+        <activity android:name=".activities.DownloadImageActivity" android:theme="@style/Theme.WithActionBar" android:label=""></activity>
+        <activity
+            android:name=".activities.CropImage.CropPhotoActivity"
+            android:label="Crop Photo"
+            android:theme="@style/Theme.WithActionBar" />
         <activity
             android:name=".MychatsActivity"
             android:label="@string/title_activity_mychats"
@@ -52,7 +56,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.TestActivity"></activity>
+        <activity android:name=".activities.TestActivity" />
         <activity android:name=".activities.EmergencyActivity" />
 
         <receiver android:name=".activities.AlarmReceiver" />
@@ -70,7 +74,9 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity" android:theme="@style/Theme.WithActionBar" />
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Theme.WithActionBar" />
     </application>
 
 </manifest>
