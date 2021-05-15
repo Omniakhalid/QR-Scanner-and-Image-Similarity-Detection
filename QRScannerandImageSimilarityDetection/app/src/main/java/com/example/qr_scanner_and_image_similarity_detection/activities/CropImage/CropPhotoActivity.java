@@ -59,7 +59,7 @@ public class CropPhotoActivity extends AppCompatActivity {
     private void startCrop() {
         CropImage.activity()
                 .setGuidelines(CropImageView.Guidelines.ON)
-                .start(this);
+                .start(CropPhotoActivity.this);
     }
 
     @Override

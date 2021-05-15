@@ -89,9 +89,9 @@ public class Upload_photo_Fragment extends Fragment {
         btn_crop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent cropActivity = new Intent(getContext(), CropPhotoActivity.class);
+                Intent cropActivity = new Intent(getActivity(), CropPhotoActivity.class);
                 startActivity(cropActivity);
-
+                getActivity().finish();
             }
         });
 
