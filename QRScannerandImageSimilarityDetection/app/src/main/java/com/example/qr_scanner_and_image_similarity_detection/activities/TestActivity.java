@@ -48,11 +48,13 @@ public class TestActivity extends AppCompatActivity {
         final PyObject obj=pyobj.callAttr("main",imageString);
         final String str=obj.toString();
         final String[] items = str.split(" nazmy ");
+
+        Toast.makeText(this, items[0], Toast.LENGTH_SHORT).show();
         //byte data[]=android.util.Base64.decode(str,Base64.DEFAULT);
         /*byte data[]=android.util.Base64.decode(items[0],Base64.DEFAULT);
         Bitmap btm= BitmapFactory.decodeByteArray(data,0,data.length);
         after.setImageBitmap(btm);*/
-        btn.setOnClickListener(new View.OnClickListener() {
+     /*   btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(i<items.length){
@@ -64,6 +66,8 @@ public class TestActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"stop",Toast.LENGTH_LONG).show();
             }
         });
+
+      */
     }
 
     public String getImageString(Bitmap bitmap)

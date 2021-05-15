@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -18,6 +19,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.qr_scanner_and_image_similarity_detection.FindOwner;
 import com.example.qr_scanner_and_image_similarity_detection.R;
+import com.example.qr_scanner_and_image_similarity_detection.activities.CropImage.CropPhotoActivity;
 
 import java.util.ArrayList;
 
@@ -31,6 +33,9 @@ public class Upload_photo_Fragment extends Fragment {
     ListView Mylist;
     CustomAdapter customadapter = null;
 
+    // adel work
+    private Button btn_crop;
+
     ArrayList<Bitmap> Images_lst = new ArrayList<>();
 
     @Override
@@ -43,6 +48,9 @@ public class Upload_photo_Fragment extends Fragment {
         Item_img = view.findViewById(R.id.uploadfrag_ItmImg);
         Categories_spiner = view.findViewById(R.id.UploadFrag_Categ_spinner);
 
+        // adel work
+        btn_crop = view.findViewById(R.id.btn_crop_image);
+
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.ItemCategories, android.R.layout.simple_spinner_dropdown_item);
         Categories_spiner.setAdapter(adapter);
         Categories_spiner.setPrompt("Select Category");
@@ -50,6 +58,20 @@ public class Upload_photo_Fragment extends Fragment {
         Mylist = view.findViewById(R.id.cutting_imgs_lst);
         customadapter = new CustomAdapter(getContext(),R.layout.cutimg_layout,Images_lst);
         Mylist.setAdapter(customadapter);
+
+        if (Images_lst.size()>0){
+            //btn_crop.setVisibility(View.VISIBLE);
+
+        }
+
+        btn_crop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent cropActivity = new Intent(getContext(), CropPhotoActivity.class);
+                startActivity(cropActivity);
+
+            }
+        });
 
         Mylist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
