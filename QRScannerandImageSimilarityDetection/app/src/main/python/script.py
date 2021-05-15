@@ -1,9 +1,9 @@
+# noinspection PyInterpreter
 import numpy as np
 import cv2
 from PIL import Image
 import base64
 import io
-import time
 def main(data):
       decoded_data=base64.b64decode(data)
       np_data=np.fromstring(decoded_data,np.uint8)

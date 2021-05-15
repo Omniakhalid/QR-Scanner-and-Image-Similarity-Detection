@@ -22,7 +22,7 @@ import java.io.ByteArrayOutputStream;
 public class TestActivity extends AppCompatActivity {
     ImageView befor;
     ImageView after;
-    Button btn,no;
+    Button btn;
     BitmapDrawable drawable;
     Bitmap bitmap;
     String imageString="";
@@ -31,11 +31,10 @@ public class TestActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        befor=(ImageView)findViewById(R.id.imageView);
+        setContentView(R.layout.activity_test);
+        befor=(ImageView)findViewById(R.id.imageView1);
         after=(ImageView)findViewById(R.id.imageView2);
         btn=(Button)findViewById(R.id.button);
-        no=(Button)findViewById(R.id.no_btn);
 
         if(!Python.isStarted())
         {Python.start(new AndroidPlatform(this));}
