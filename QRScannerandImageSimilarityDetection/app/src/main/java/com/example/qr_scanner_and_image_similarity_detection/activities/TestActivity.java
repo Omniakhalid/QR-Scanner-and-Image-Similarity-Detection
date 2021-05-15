@@ -40,6 +40,9 @@ public class TestActivity extends AppCompatActivity {
         {Python.start(new AndroidPlatform(this));}
 
         final Python py =Python.getInstance();
+
+
+
         drawable=(BitmapDrawable)befor.getDrawable();
         bitmap=drawable.getBitmap();
         imageString=getImageString(bitmap);
