@@ -1,184 +1,271 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#FFFFFF"
+    android:orientation="vertical"
     tools:context=".activities.ProfileActivity">
 
-    <LinearLayout
-        android:layout_width="396dp"
-        android:layout_height="130dp"
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:background="@color/colorPrimaryDark"
-        android:orientation="horizontal">
+        android:padding="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            app:cardCornerRadius="50dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.056"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp"
-            app:layout_constraintVertical_bias="0.044">
-
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_profile"
-
-                />
-        </androidx.cardview.widget.CardView>
-
+        <ImageView
+            android:id="@+id/ic_profile"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/user_img_background"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_profile" />
 
         <TextView
+            android:id="@+id/txt_user_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/ic_profile"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="30dp"
+            android:layout_toEndOf="@+id/ic_profile"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingTop="10dp"
+            android:text="user user user  "
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold|italic" />
+
+        <TextView
+
             android:id="@+id/EmailEditText"
-            android:layout_width="153dp"
-            android:layout_height="41dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_user_name"
+            android:layout_alignStart="@+id/txt_user_name"
+            android:layout_alignBottom="@+id/ic_profile"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="-9dp"
+            android:ellipsize="end"
             android:gravity="center"
+            android:maxLines="1"
             android:text="UserName@gmail.com"
             android:textColor="#f0f0f0"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-    </LinearLayout>
+            android:textSize="20sp" />
+    </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:orientation="horizontal">
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout2">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/Pro_Name_edTxt"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="304dp"
-            android:layout_height="78dp"
-            android:layout_marginTop="10dp"
-            android:hint="UserName"
-            app:boxStrokeColor="@color/colorPrimaryDark">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/NameEditText"
-                android:layout_width="269dp"
-                android:layout_height="59dp"
-                android:text="UserName" />
-        </com.google.android.material.textfield.TextInputLayout>
-        <ImageView
-            android:id="@+id/Pro_EditNameBtn"
-            android:layout_gravity="center_vertical"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:src="@drawable/edit_info" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/Pro_Pass_edTxt"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="302dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/l1"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:hint="Password"
-            android:transitionName="trans_password"
-            app:boxStrokeColor="@color/colorPrimaryDark"
-            app:passwordToggleEnabled="true">
+            android:orientation="horizontal">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/PassEditText"
-                android:layout_width="265dp"
-                android:layout_height="59dp"
-                android:layout_marginLeft="5dp"
-                android:inputType="textPassword"
-                android:text="password" />
-        </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/Pro_Name_edTxt"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="UserName"
 
-        <ImageView
-            android:layout_gravity="center_vertical"
-            android:id="@+id/Pro_EditPassBtn"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:src="@drawable/edit_info" />
-    </LinearLayout>
+                app:boxStrokeColor="@color/colorPrimaryDark"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/Pro_EditNameBtn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:orientation="horizontal">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/NameEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:text="UserName"
+                    android:textAllCaps="false"
+                    android:textSize="20sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/Pro_Number_edTxt"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="300dp"
-            android:layout_height="79dp"
-            android:hint="Phone Number"
-            app:boxStrokeColor="@color/colorPrimaryDark">
+            <ImageView
+                android:id="@+id/Pro_EditNameBtn"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/edit_info"
+                app:layout_constraintBottom_toBottomOf="@+id/Pro_Name_edTxt"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/Pro_Name_edTxt" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/NumberEditText"
-                android:layout_width="269dp"
-                android:layout_height="59dp"
-                android:text="Number" />
-        </com.google.android.material.textfield.TextInputLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/l2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/l1">
 
-        <ImageView
-            android:id="@+id/Pro_EditNunberBtn"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/edit_info" />
-    </LinearLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/Pro_Pass_edTxt"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content"
+                android:hint="Password"
+                android:transitionName="trans_password"
+                app:layout_constraintEnd_toStartOf="@+id/Pro_EditPassBtn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:passwordToggleEnabled="true">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-    <TextView
-        android:id="@+id/Pro_QR"
-        android:layout_width="103dp"
-        android:layout_height="39dp"
-        android:gravity="center_vertical"
-        android:text="Your QR"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="30dp"/>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/PassEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:textSize="20sp"
+                    android:inputType="textPassword"
+                    android:text="password" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <ImageButton
-            android:id="@+id/QR_Image"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:scaleType="fitCenter"
+            <ImageView
+                android:id="@+id/Pro_EditPassBtn"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/edit_info"
+                app:layout_constraintBottom_toBottomOf="@+id/Pro_Pass_edTxt"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/Pro_Pass_edTxt" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/l3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/l2"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/Pro_Number_edTxt"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Phone Number"
+                app:boxStrokeColor="@color/colorPrimaryDark"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+                app:layout_constraintEnd_toStartOf="@id/Pro_EditNunberBtn"
+             >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/NumberEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:textSize="20sp"
+                    android:text="Number" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageView
+                android:id="@+id/Pro_EditNunberBtn"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/edit_info"
+                app:layout_constraintBottom_toBottomOf="@+id/Pro_Number_edTxt"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/Pro_Number_edTxt" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/Pro_SaveBtn"
+            android:layout_below="@+id/l3"
+            android:layout_alignParentEnd="true"
+           android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/Pro_QR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="15dp"
+                android:gravity="center_vertical"
+                android:text="Your QR"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/QR_Image"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/QR_Image" />
+
+            <ImageButton
+                android:id="@+id/QR_Image"
+                android:layout_width="200dp"
+                android:layout_height="190dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="center"
+                android:layout_marginEnd="16dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/qr"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/Pro_SaveBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/qr" />
-    </LinearLayout>
+            android:layout_margin="5dp"
+            android:background="@drawable/rounded_shapes"
+            android:text="Save"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
+    </RelativeLayout>
 
-    <Button
-        android:id="@+id/Pro_SaveBtn"
-        android:layout_width="253dp"
-        android:layout_height="49dp"
-        android:layout_gravity="center"
-        android:background="@drawable/rounded_shapes"
-        android:text="Save"
-        android:textSize="18dp" />
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

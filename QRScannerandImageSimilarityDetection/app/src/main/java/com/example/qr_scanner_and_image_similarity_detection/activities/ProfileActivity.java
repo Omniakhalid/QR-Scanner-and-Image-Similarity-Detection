@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +26,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.UploadTask;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.common.BitMatrix;
@@ -41,6 +43,10 @@ public class ProfileActivity extends AppCompatActivity {
     TextView Email;
     ImageButton Qr_img;
     DatabaseReference reff;
+    boolean blockUser=false;
+
+
+    private TextView UserName;
     private FirebaseUser current_user;
     private List<User> currenInfo;
 
@@ -51,8 +57,8 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        init();
         current_user = FirebaseAuth.getInstance().getCurrentUser();
+        init();
 
         currenInfo=new ArrayList<>();
         sentData();
@@ -75,11 +81,14 @@ public class ProfileActivity extends AppCompatActivity {
         Phone = findViewById(R.id.NumberEditText);
         Email = findViewById(R.id.EmailEditText);
         Qr_img = findViewById(R.id.QR_Image);
+        UserName = findViewById(R.id.txt_user_name);
 
         NameEdt.setEnabled(false);
         PassEdt.setEnabled(false);
         NumberEdt.setEnabled(false);
 
+
+       reff=FirebaseDatabase.getInstance().getReference("Users");
 
         Qr_img.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,6 +105,7 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 NameEdt.setEnabled(true);
                 NameEdt.setFocusableInTouchMode(true);
+
             }
         });
 
@@ -122,14 +132,20 @@ public class ProfileActivity extends AppCompatActivity {
                 PassEdt.setEnabled(false);
                 NumberEdt.setEnabled(false);
 
-               /* User Updateuser=new User();
-                Updateuser.setEmail((String) Email.getText());
+                UserName.setText(Name.getText().toString());
+
+                User Updateuser=new User();
+                Updateuser.setEmail(Email.getText().toString());
                 Updateuser.setGender(Gender);
                 Updateuser.setName(Name.getText().toString());
                 Updateuser.setPassword(Pass.getText().toString());
                 Updateuser.setPhone(Phone.getText().toString());
                 Updateuser.setUId(current_user.getUid());
-                reff.child("Users").child(current_user.getUid()).setValue(Phone.getText());*/
+                Updateuser.setBlockUser(blockUser);
+
+                reff.child(current_user.getUid()).setValue(Updateuser);
+
+                Toast.makeText(ProfileActivity.this, "Updated Successfully..", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -155,8 +171,10 @@ public class ProfileActivity extends AppCompatActivity {
                 String pass=currenInfo.get(0).getPassword();
                 String phone=currenInfo.get(0).getPhone();
                 Gender=currenInfo.get(0).getGender();
+                blockUser=currenInfo.get(0).isBlockUser();
 
                 Name.setText(name);
+                UserName.setText(name);
                 Pass.setText(pass);
                 Phone.setText(phone);
                 Email.setText(email);
