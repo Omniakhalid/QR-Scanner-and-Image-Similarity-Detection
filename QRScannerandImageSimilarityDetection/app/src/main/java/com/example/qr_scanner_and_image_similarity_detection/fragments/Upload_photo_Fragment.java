@@ -1,12 +1,9 @@
 package com.example.qr_scanner_and_image_similarity_detection.fragments;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -21,8 +18,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.chaquo.python.PyObject;
@@ -35,10 +30,11 @@ import com.example.qr_scanner_and_image_similarity_detection.activities.CropImag
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
-import static android.provider.MediaStore.ACTION_IMAGE_CAPTURE;
-
 
 public class Upload_photo_Fragment extends Fragment {
+
+
+    public static final String Key_CATEGORY="CAT";
 
     ImageView Item_img;
     Spinner Categories_spiner;
@@ -50,11 +46,10 @@ public class Upload_photo_Fragment extends Fragment {
 
     // integrate with python
 
-    Button btn;
-    BitmapDrawable drawable;
-    Bitmap bitmap;
     String imageString="";
     public int i=1;
+    private String category;
+
 
     ArrayList<Bitmap> Images_lst = new ArrayList<>();
 
@@ -62,8 +57,8 @@ public class Upload_photo_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-            Intent CameraIntent = new Intent(ACTION_IMAGE_CAPTURE);
-            startActivityForResult(CameraIntent, 1888);
+            //Intent CameraIntent = new Intent(ACTION_IMAGE_CAPTURE);
+            //startActivityForResult(CameraIntent, 1888);
 
 
         View view = inflater.inflate(R.layout.fragment_upload_photo_, container, false);
@@ -89,9 +84,16 @@ public class Upload_photo_Fragment extends Fragment {
         btn_crop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent cropActivity = new Intent(getActivity(), CropPhotoActivity.class);
-                startActivity(cropActivity);
-                getActivity().finish();
+
+                if (GetSelectedGategory()) {
+
+                    Intent cropActivity = new Intent(getActivity(), CropPhotoActivity.class);
+                    cropActivity.putExtra(Key_CATEGORY,category);
+                    startActivity(cropActivity);
+                    getActivity().finish();
+
+
+                }
             }
         });
 
@@ -100,6 +102,7 @@ public class Upload_photo_Fragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getContext(), FindOwner.class);
                 intent.putExtra("SelectedImage",Images_lst.get(position));
+                intent.putExtra("r","notcrop");
                 intent.putExtra("index",position);
                 startActivity(intent);
 
@@ -108,6 +111,23 @@ public class Upload_photo_Fragment extends Fragment {
 
         return view;
     }
+
+    private boolean GetSelectedGategory() {
+         category = Categories_spiner.getSelectedItem().toString();
+        if (category.equals("Select Category")){
+            ShowMessage("Please Choose Category");
+            return false;
+        }
+        else {
+            return true;
+        }
+
+    }
+
+    private void ShowMessage(String s) {
+        Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
+    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

@@ -24,6 +24,12 @@ android {
                 install"opencv-contrib-python-headless"
                 install"pillow"
                 install"numpy"
+                install "firebase"
+                install "python_jwt"
+                install "gcloud"
+                install "sseclient"
+                install "pycrypto"
+                install "requests-toolbelt"
 
             }
 

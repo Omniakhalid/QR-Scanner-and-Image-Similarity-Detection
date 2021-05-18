@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +16,11 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import java.util.ArrayList;
+
+import static com.example.qr_scanner_and_image_similarity_detection.activities.CropImage.CropPhotoActivity.KEY_OF_SEND_TO_FIND_OWNER;
 
 public class FindOwner extends AppCompatActivity {
 
@@ -23,22 +28,21 @@ public class FindOwner extends AppCompatActivity {
     ArrayList<Integer> owners = new ArrayList<>();
     CustomAdapter customadapter;
     Button search_btn;
-    ImageView Image;
+    ImageView Image, selecteditem_img;
     boolean searched;
+
+    private   Uri ImageURi;
+    private     Bitmap selectedimg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_owner);
+        INIT();
+        GetImage_Cropped();
 
-        ownersimg.add(R.drawable.user);
 
-        search_btn = findViewById(R.id.findowner_search_btn);
-
-        Bitmap selectedimg = getIntent().getParcelableExtra("SelectedImage");
         int indx = getIntent().getIntExtra("index",-1);
 
-        ImageView selecteditem_img = findViewById(R.id.selecteditem_img);
-        selecteditem_img.setImageBitmap(selectedimg);
         Toast.makeText(this, "Here " + indx, Toast.LENGTH_SHORT).show();
 
         customadapter = new CustomAdapter(this,R.layout.ownerlst_layout,owners);
@@ -93,4 +97,36 @@ public class FindOwner extends AppCompatActivity {
             return view;
         }
     }
+
+    private void GetImage_Cropped(){
+
+        String checkIntent = getIntent().getStringExtra("r");
+
+        if (checkIntent.equals("crop")){
+            // get image from crop activity
+            ImageURi = getIntent().getParcelableExtra(KEY_OF_SEND_TO_FIND_OWNER);
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), ImageURi);
+                selecteditem_img.setImageBitmap(bitmap);
+
+
+            }catch (Exception e) {
+            }
+
+           // selecteditem_img.setImageURI(ImageURi);
+        }
+        else {
+            selectedimg = getIntent().getParcelableExtra("SelectedImage");
+            selecteditem_img.setImageBitmap(selectedimg);
+        }
+
+    }
+
+    private void INIT(){
+        ownersimg.add(R.drawable.user);
+        search_btn = findViewById(R.id.findowner_search_btn);
+        selecteditem_img = findViewById(R.id.selecteditem_img);
+
+    }
+
 }
