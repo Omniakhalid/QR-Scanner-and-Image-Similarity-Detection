@@ -93,7 +93,7 @@ public class siftActivity extends AppCompatActivity {
                            String message = snapshot.child("imageLosted").getValue().toString();
                            Bitmap c=  decodeBase64(message);
                            imageView.setImageBitmap(c);
-                            Toast.makeText(siftActivity.this, message, Toast.LENGTH_SHORT).show();
+                           Toast.makeText(siftActivity.this, message, Toast.LENGTH_SHORT).show();
 
                         }
                     }

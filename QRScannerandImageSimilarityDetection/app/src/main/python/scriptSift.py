@@ -64,7 +64,7 @@ def main (data,Category):
             number_keypoints = len(kp_2)
         percentage_similarity = len(good_points) / number_keypoints * 100
 
-        if (int(percentage_similarity) > 80):
+        if (int(percentage_similarity) > 0):
             UserIds.append(Ids[id] + "with" + str(int(percentage_similarity))+"with"+Image_IDS[id])
         id = id + 1
     return UserIds

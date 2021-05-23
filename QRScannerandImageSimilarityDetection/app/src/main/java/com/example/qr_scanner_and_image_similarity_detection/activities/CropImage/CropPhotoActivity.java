@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.qr_scanner_and_image_similarity_detection.FindOwner;
 import com.example.qr_scanner_and_image_similarity_detection.R;
 import com.example.qr_scanner_and_image_similarity_detection.activities.siftActivity;
 import com.theartofdev.edmodo.cropper.CropImage;
@@ -51,20 +52,24 @@ public class CropPhotoActivity extends AppCompatActivity {
         btn_upload_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-/*
+                    String k = getIntent().getStringExtra(Key_CATEGORY);
+
                     Intent find_owner_activity = new Intent(CropPhotoActivity.this, FindOwner.class);
                     find_owner_activity.putExtra(KEY_OF_SEND_TO_FIND_OWNER,uriData);
                     find_owner_activity.putExtra("r","crop");
+                    find_owner_activity.putExtra(Key_CATEGORY,k);
                     startActivity(find_owner_activity);
                     finish();
- */
-                String k = getIntent().getStringExtra(Key_CATEGORY);
 
+
+
+//                String k = getIntent().getStringExtra(Key_CATEGORY);
+/*
                 Intent intent = new Intent(CropPhotoActivity.this, siftActivity.class);
                 intent.putExtra(KEY_OF_SEND_TO_FIND_OWNER,uriData);
                 intent.putExtra(Key_CATEGORY,k);
                 startActivity(intent);
-
+*/
             }
         });
     }
