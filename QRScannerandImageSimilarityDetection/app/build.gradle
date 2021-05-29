@@ -47,7 +47,7 @@ android {
         python{
 
             // adel path
-            buildPython "C:/Users/Adel/AppData/Local/Programs/Python/Python37-32/python.exe"
+            //buildPython "C:/Users/Adel/AppData/Local/Programs/Python/Python37-32/python.exe"
 
            // buildPython "C:/Users/acs/AppData/Local/Programs/Python/Python36/python.exe"
         }

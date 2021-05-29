@@ -67,7 +67,7 @@ public class Myitems extends AppCompatActivity {
     final static int GALLERY_REQUEST_CODE = 101;
     Bitmap bitmap;
 
-    int item_id;
+    int item_id=1;
     private FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
 
     DatabaseReference reff;
@@ -82,6 +82,8 @@ public class Myitems extends AppCompatActivity {
 
     List<String> LostitemImage = new ArrayList<>();
     List<String> LostitemDedcript = new ArrayList<>();
+    List<String> LostitemPhoto = new ArrayList<>();
+    List<String> LostitemCatId = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,8 +142,15 @@ public class Myitems extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if( !(cateSpin.getSelectedItem().toString().equals("Select Category")&&decre.getText().toString().equals("")&& itmImag.getTag().toString().equalsIgnoreCase("0")) ){
-
+                if( cateSpin.getSelectedItem().toString().equals("Select Category") )
+                    Toast.makeText(Myitems.this,"Please select your Category",Toast.LENGTH_LONG).show();
+                if(decre.getText().toString().equals(""))
+                    Toast.makeText(Myitems.this,"Please Enter description for your Item",Toast.LENGTH_LONG).show();
+                if(itmImag.getTag().toString().equalsIgnoreCase("0"))
+                    Toast.makeText(Myitems.this,"Please Upload your photo",Toast.LENGTH_LONG).show();
+               // if(LostitemPhoto.contains(encodeTobase64(bitmap)))
+                 //   Toast.makeText(Myitems.this,"you Entered this Item before",Toast.LENGTH_LONG).show();
+                else {
                     item_id=ItemList.size();
                     ItemCardClass NewItem=new ItemCardClass();
                     NewItem.setDiscreaption(decre.getText().toString());
@@ -150,14 +159,13 @@ public class Myitems extends AppCompatActivity {
                     NewItem.setCat_ID(cateSpin.getSelectedItem().toString());
                     NewItem.setItemLostchecked(false);
                     NewItem.setDeleteItem(R.drawable.ic_delete_icon);
-                    reff.child(current_user.getUid()).child(String.valueOf(item_id+1)).setValue(NewItem);
+                    reff.child(current_user.getUid()).child(String.valueOf(item_id)).setValue(NewItem);
+                    item_id++;
 
                     ItemList.add(NewItem);
                     myResAdapter.notifyDataSetChanged();
                     Toast.makeText(Myitems.this,"One Item Added",Toast.LENGTH_LONG).show();
                 }
-                else
-                    Toast.makeText(Myitems.this,"Please Enter your All Data",Toast.LENGTH_LONG).show();
 
             }
         });
@@ -186,6 +194,8 @@ public class Myitems extends AppCompatActivity {
                     ItemCardClass data=ds.getValue(ItemCardClass.class);
                     LostitemImage.add(data.getImageSource());
                     LostitemDedcript.add(data.getDiscreaption());
+                    LostitemPhoto.add(data.getImageSource());
+                    LostitemCatId.add(data.getCat_ID());
                     ItemList.add(data);
                 }
 
@@ -208,6 +218,16 @@ public class Myitems extends AppCompatActivity {
             @Override
             public void onMarkedDeleted(int position) {
                 reff.child(current_user.getUid()).child(String.valueOf(position+1)).child("itemLostchecked").setValue(false);
+               // reffLOstitem.child(current_user.getUid()).child(LostitemImage.get(position)).setValue(null);
+                //reffPosts.child(current_user.getUid()).child(LostitemImage.get(position)).setValue(null);
+            }
+
+            @Override
+            public void onItemDeleted(int position) {
+                DatabaseReference reff;
+                FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
+                reff= FirebaseDatabase.getInstance().getReference().child("Items").child(current_user.getUid());
+                reff.child(String.valueOf(position+1)).setValue(null);
             }
 
         });
@@ -220,8 +240,9 @@ public class Myitems extends AppCompatActivity {
         myLostitem=new Lost_ItemClass();
         myLostitem.setItem_ID(position+1);
         myLostitem.setUser_ID(id);
+        myLostitem.setImageLosted(LostitemImage.get(position));
         reffLOstitem= FirebaseDatabase.getInstance().getReference().child("LostItems");
-        reffLOstitem.push().setValue(myLostitem);
+        reffLOstitem.child(LostitemCatId.get(position)).push().setValue(myLostitem);
 
         reff.child(current_user.getUid()).child(String.valueOf(position+1)).child("itemLostchecked").setValue(true);
 

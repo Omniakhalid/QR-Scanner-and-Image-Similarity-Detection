@@ -4,8 +4,17 @@ public class Lost_ItemClass {
 
     private int Item_ID;
     private String User_ID;
+    private String imageLosted;
 
     public Lost_ItemClass(){
+    }
+
+    public String getImageLosted() {
+        return imageLosted;
+    }
+
+    public void setImageLosted(String imageLosted) {
+        this.imageLosted = imageLosted;
     }
 
     public int getItem_ID() {

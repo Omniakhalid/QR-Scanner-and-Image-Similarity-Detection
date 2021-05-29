@@ -31,6 +31,7 @@ public class MyItemAdapter extends RecyclerView.Adapter<MyItemAdapter.ExampleVie
     public interface OnItemClickListener {
         void onMarkedClick(int position);
         void onMarkedDeleted(int position);
+        void onItemDeleted(int position);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -95,10 +96,7 @@ public class MyItemAdapter extends RecyclerView.Adapter<MyItemAdapter.ExampleVie
                     position = getAdapterPosition();
                     myExampleList.remove(position);
                     notifyDataSetChanged();
-                    DatabaseReference reff;
-                    FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
-                    reff= FirebaseDatabase.getInstance().getReference().child("Items").child(current_user.getUid());
-                    reff.child(String.valueOf(position+1)).setValue(null);
+                    listener.onItemDeleted(position);
                 }
             });
 
