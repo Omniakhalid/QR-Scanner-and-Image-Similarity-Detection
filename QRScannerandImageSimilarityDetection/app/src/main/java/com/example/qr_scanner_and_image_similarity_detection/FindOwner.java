@@ -27,6 +27,8 @@ import com.chaquo.python.PyObject;
 import com.chaquo.python.Python;
 import com.chaquo.python.android.AndroidPlatform;
 import com.example.qr_scanner_and_image_similarity_detection.models.LostImageModel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -47,7 +49,7 @@ import static com.example.qr_scanner_and_image_similarity_detection.activities.C
 import static com.example.qr_scanner_and_image_similarity_detection.fragments.Upload_photo_Fragment.Key_CATEGORY;
 
 public class FindOwner extends AppCompatActivity {
-
+    FirebaseUser fuser;
     ArrayList<Integer> ownersimg = new ArrayList<>();
     ArrayList<Integer> owners = new ArrayList<>();
 
@@ -148,12 +150,12 @@ public class FindOwner extends AppCompatActivity {
                 similaritytxt.setText("Similarity:");
                 similarity_res.setText(modelList.get(position).getSimilarity()+"% ");
             }
-
+            fuser = FirebaseAuth.getInstance().getCurrentUser();
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    String s= modelList.get(position).getUserId();
-                    Toast.makeText(FindOwner.this, "open chat ", Toast.LENGTH_SHORT).show();
+                    String USER_ID= modelList.get(position).getUserId();
+                    sendMessage(fuser.getUid(), USER_ID, " ");
                 }
             });
 
@@ -258,6 +260,20 @@ public class FindOwner extends AppCompatActivity {
             });
 
         }
+
+    }
+
+
+    private void sendMessage(String sender, String reciver, String message) {
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("sender", sender);
+        hashMap.put("reciver", reciver);
+        hashMap.put("message", message);
+
+
+        reference.child("Chat").push().setValue(hashMap);
 
     }
 

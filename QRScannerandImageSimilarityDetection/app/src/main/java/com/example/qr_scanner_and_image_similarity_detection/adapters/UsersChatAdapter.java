@@ -59,8 +59,8 @@ public class UsersChatAdapter extends RecyclerView.Adapter<UsersChatAdapter.View
         final FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
         User user=muser.get(position);
 
-    holder.Username.setText(user.getName());
-    holder.profile_image.setImageResource(R.drawable.images);
+    holder.Username.setText("Owner");
+    holder.profile_image.setImageResource(R.drawable.avatar);
    //to move to chat activity
     holder.itemView.setOnClickListener(new View.OnClickListener() {
         @Override

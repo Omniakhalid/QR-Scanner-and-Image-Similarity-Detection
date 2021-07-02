@@ -52,6 +52,8 @@ android {
             // buildPython "C:/Users/acs/AppData/Local/Programs/Python/Python36/python.exe"
             //Abanoub
             buildPython "C:/Users/hs/AppData/Local/Programs/Python/Python37/python.exe"
+            //aml
+            buildPython "C:/Users/acs/AppData/Local/Programs/Python/Python37/python.exe"
 
         }
     }
