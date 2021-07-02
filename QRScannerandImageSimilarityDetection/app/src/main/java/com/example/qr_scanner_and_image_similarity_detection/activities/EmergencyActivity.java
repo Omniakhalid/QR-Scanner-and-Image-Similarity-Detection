@@ -1,7 +1,15 @@
 package com.example.qr_scanner_and_image_similarity_detection.activities;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -10,15 +18,26 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.example.qr_scanner_and_image_similarity_detection.R;
+import com.example.qr_scanner_and_image_similarity_detection.activities.Location.MyLocation;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 
 import static com.example.qr_scanner_and_image_similarity_detection.activities.HomeActivity.QR_SCANNING_KEY;
 
@@ -33,13 +52,13 @@ public class EmergencyActivity extends AppCompatActivity {
     private String USER_ID;
     FirebaseUser fuser;
     EditText message1;
-
+    FusedLocationProviderClient fusedLocationProviderClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emergency);
-
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         Init();
 
 
@@ -103,19 +122,21 @@ public class EmergencyActivity extends AppCompatActivity {
 
         fuser = FirebaseAuth.getInstance().getCurrentUser();
         message1 = findViewById(R.id.txt_message_emergency);
+        showSettingsAlert();
+        get_location();
+
         sendEmergency_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 int position = spinner_type.getSelectedItemPosition();
                 if (position != 0) {
                     String message = TextEmergency.getText().toString();
                     if (!message.isEmpty()) {
                         ShowMessage(USER_ID);
-                        String messag = message1.getText().toString();
+                        String messag = message1.getText().toString() + "\n"+"my current location"+addresss;
                         if (!messag.equals("")) {
                             sendMessage(fuser.getUid(), USER_ID, messag);
-
+                            //LatLng updated_location = new LatLng(location.getLatitude(),location.getLongitude());
                         } else {
                             Toast.makeText(getApplicationContext(), "you cant send empty message", Toast.LENGTH_LONG).show();
                         }
@@ -172,5 +193,38 @@ public class EmergencyActivity extends AppCompatActivity {
 
     }
 
+    private void showSettingsAlert() {
+        Toast.makeText(this, "GPS is disabled in your device. Please Enable it ?", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        this.startActivity(intent);
+    }
+public static String addresss="";
+    private void get_location() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
+            @Override
+            public void onComplete(@NonNull Task<Location> task) {
+                Location location = task.getResult();
+                if (location != null)
+
+                    try {
+                        Geocoder geocoder = new Geocoder(EmergencyActivity.this, Locale.getDefault());
+                        List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+
+                        String address = "";
+                        for (int i = 0; i <= addresses.get(0).getMaxAddressLineIndex(); i++)
+                        {address += addresses.get(0).getAddressLine(i) + ", ";}
+                        Log.w("Current address", address);
+                        addresss=address;
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+            }
+        });
+    }
 
 }

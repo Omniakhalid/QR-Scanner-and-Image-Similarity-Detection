@@ -16,15 +16,13 @@ def main (data,Category):
 
 
     # Sift and Flann
-    sift = cv2.SIFT_create(sigma=1.6, contrastThreshold=0.04, edgeThreshold=10, nOctaveLayers=4, nfeatures=10)
+    sift = cv2.SIFT_create(sigma=1.6, contrastThreshold=0.04, edgeThreshold=10, nOctaveLayers=4, nfeatures=5)
     kp_1, desc_1 = sift.detectAndCompute(gray1, None)
 
     index_params = dict(algorithm=0, trees=5)
     search_params = dict(check=50)
     flann = cv2.FlannBasedMatcher(index_params, search_params)
     all_images_to_compare = []
-    titles=[]
-    rr=""
     all_images=[]
     Image_IDS=[]
     Ids=[]
@@ -52,8 +50,11 @@ def main (data,Category):
             b, g, r = cv2.split(difference)
             if cv2.countNonZero(b) == 0 and cv2.countNonZero(g) == 0 and cv2.countNonZero(r) == 0:
                 UserIds.append(Ids[id] + "with" + "100")
-                #print("Similarity: 100% (equal size and channels)")
-                break
+                #print("the img are completly equal")
+                c=1
+            else:
+                #print("not equal")
+                c=0
         #2) Check for similarities between the 2 images
         gray2 = cv2.cvtColor(image_to_compare,cv2.COLOR_BGR2GRAY)
         kp_2, desc_2 = sift.detectAndCompute(gray2, None)

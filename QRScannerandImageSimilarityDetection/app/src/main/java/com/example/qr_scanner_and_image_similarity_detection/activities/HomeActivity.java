@@ -316,7 +316,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                         }
                     }
                 } catch (Exception ex) {
-                    Toast.makeText(HomeActivity.this, "In Way to Update Your Location...", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(HomeActivity.this, "In Way to Update Your Location...", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -353,7 +353,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     //stat=true;
 
                 } else
-                {Toast.makeText(this, "In Way To Update Your Location...", Toast.LENGTH_SHORT).show();
+                {//Toast.makeText(this, "In Way To Update Your Location...", Toast.LENGTH_SHORT).show();
                 }
             } else {
                 //when permission denied
@@ -483,22 +483,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         locationModel.setUserId(user_id);
         reference.push().setValue(locationModel);
     }*/
-
-    /*public static Thread performOnBackgroundThread(final Runnable runnable) {
-        final Thread t = new Thread() {
-            @Override
-            public void run() {
-                try {
-                    runnable.run();
-                } finally {
-
-                }
-            }
-        };
-        t.start();
-        return t;
-    }*/
-
     //to ope gps setting if gps is disabled hst5dmha b3den
     private void showSettingsAlert() {
         Toast.makeText(this, "GPS is disabled in your device. Please Enable it ?", Toast.LENGTH_LONG).show();
@@ -506,16 +490,5 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         this.startActivity(intent);
     }
-
-    /*public Thread doWork() {
-        final Runnable runnable = new Runnable() {
-            public void run() {
-                System.out.println("Background Task here");
-            }
-        };
-
-        // run on background thread.
-        return performOnBackgroundThread(runnable);
-    }*/
 
 }
