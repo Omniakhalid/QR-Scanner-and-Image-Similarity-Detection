@@ -75,26 +75,28 @@ public class Reminder_Item_Fragment extends Fragment {
                 TimePickerDialog set_timePicker=new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        hours=hourOfDay;
-                        minuits=minute;
                         Calendar calendar= Calendar.getInstance();
-                        calendar.set(0,0,0,hours,minuits);
+                        calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                        calendar.set(Calendar.MINUTE, minute);
+                        calendar.set(Calendar.SECOND, 0);
                         long alarmStartTime = calendar.getTimeInMillis();
                         settimetext.setText(DateFormat.format("hh:mm aa",calendar));
+                        alarmManager.set(AlarmManager.RTC_WAKEUP, alarmStartTime, pendingIntent);
+
                         // Intent
-                        Intent intent = new Intent(getContext(), AlarmReceiver.class);
-                        intent.putExtra("notificationId", notificationId);
+                        //Intent intent = new Intent(getContext(), AlarmReceiver.class);
+                       // intent.putExtra("notificationId", notificationId);
 
                         // PendingIntent
-                        PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                                getContext(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT
-                        );
+                       // PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                       //         getContext(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT
+                      //  );
 
                         // AlarmManager
-                        AlarmManager alarmManager = (AlarmManager)getActivity().getSystemService(ALARM_SERVICE);
+                       // AlarmManager alarmManager = (AlarmManager)getActivity().getSystemService(ALARM_SERVICE);
 
                         // Set Alarm
-                        alarmManager.set(AlarmManager.RTC_WAKEUP,alarmStartTime , pendingIntent);
+                      //  alarmManager.set(AlarmManager.RTC_WAKEUP,alarmStartTime , pendingIntent);
 
                         //
                         Toast.makeText(getContext(), "Alarm done!", Toast.LENGTH_SHORT).show();
