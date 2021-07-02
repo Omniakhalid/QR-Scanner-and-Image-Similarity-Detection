@@ -46,10 +46,12 @@ android {
         }
         python{
 
-            // adel path
+            // Adel path
             //buildPython "C:/Users/Adel/AppData/Local/Programs/Python/Python37-32/python.exe"
-
-           // buildPython "C:/Users/acs/AppData/Local/Programs/Python/Python36/python.exe"
+            // Doha
+            // buildPython "C:/Users/acs/AppData/Local/Programs/Python/Python36/python.exe"
+            //Abanoub
+            buildPython "C:/Users/hs/AppData/Local/Programs/Python/Python37/python.exe"
         }
     }
 

@@ -142,8 +142,6 @@ public class FindOwner extends AppCompatActivity {
 
             //set data after searching
             if (searched) {
-
-
                 Image.setImageBitmap(modelList.get(position).getImg_bitmap());
                 recomendtxt.setText("Recommended Owner");
                 chathinttxt.setText("Chat To Contact with him");
@@ -172,15 +170,12 @@ public class FindOwner extends AppCompatActivity {
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), ImageURi);
                 selecteditem_img.setImageBitmap(bitmap);
-
-
             } catch (Exception e) {
             }
-
-            // selecteditem_img.setImageURI(ImageURi);
         } else {
             selectedimg = getIntent().getParcelableExtra("SelectedImage");
             selecteditem_img.setImageBitmap(selectedimg);
+            bitmap = selectedimg;
         }
 
     }
@@ -191,12 +186,6 @@ public class FindOwner extends AppCompatActivity {
 
         checkIntent = getIntent().getStringExtra("r");
         Cat_name = getIntent().getStringExtra(Key_CATEGORY);
-        Uri ImageURi = getIntent().getParcelableExtra(KEY_OF_SEND_TO_FIND_OWNER);
-        try {
-            bitmap = MediaStore.Images.Media.getBitmap(getApplication().getContentResolver(), ImageURi);
-
-        } catch (Exception e) {
-        }
 
         ownersimg.add(R.drawable.user);
         search_btn = findViewById(R.id.findowner_search_btn);

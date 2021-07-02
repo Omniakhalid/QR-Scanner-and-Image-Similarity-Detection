@@ -88,7 +88,6 @@ public class HomeFragment extends Fragment {
         hashMap.put("reciver", reciver);
         hashMap.put("message", message);
 
-
         reference.child("Chat").push().setValue(hashMap);
 
     }

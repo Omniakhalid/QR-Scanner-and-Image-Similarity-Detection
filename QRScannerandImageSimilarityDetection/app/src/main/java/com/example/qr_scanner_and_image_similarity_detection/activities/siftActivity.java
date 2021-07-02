@@ -42,7 +42,6 @@ public class siftActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sift);
 
-        mReference = FirebaseDatabase.getInstance().getReference().child("LostItems").child("Mobiles");
         imageView = findViewById(R.id.siftimage);
 
 
@@ -51,6 +50,8 @@ public class siftActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 cat_name = getIntent().getStringExtra(Key_CATEGORY);
+                mReference = FirebaseDatabase.getInstance().getReference().child("LostItems").child(cat_name);
+
                 Uri ImageURi = getIntent().getParcelableExtra(KEY_OF_SEND_TO_FIND_OWNER);
                 try {
                     bitmap = MediaStore.Images.Media.getBitmap(getApplication().getContentResolver(), ImageURi);

@@ -10,13 +10,17 @@ def main (data,Category):
     decoded_data = base64.b64decode(data)
     np_data = np.fromstring(decoded_data, np.uint8)
     original = cv2.imdecode(np_data, cv2.IMREAD_UNCHANGED)
+    #gray = cv2.imread(original, 0)
+    gray= cv2.cvtColor(original,cv2.COLOR_BGR2GRAY)
+    gray = cv2.resize(gray, (800, 850))
+
 
     # Sift and Flann
-    sift = cv2.SIFT_create()
-    kp_1, desc_1 = sift.detectAndCompute(original, None)
+    sift = cv2.SIFT_create(edgeThreshold =10, nfeatures = 5 , sigma = 1.6, contrastThreshold=0.04, nOctaveLayers=3)
+    kp_1, desc_1 = sift.detectAndCompute(gray, None)
 
     index_params = dict(algorithm=0, trees=5)
-    search_params = dict()
+    search_params = dict(check=50)
     flann = cv2.FlannBasedMatcher(index_params, search_params)
     all_images_to_compare = []
     titles=[]
@@ -33,7 +37,8 @@ def main (data,Category):
     for ImageId in all_images:
         decoded1_data=base64.b64decode(ImageId)
         np_data1=np.fromstring(decoded1_data,np.uint8)
-        img=cv2.imdecode(np_data1,cv2.IMREAD_UNCHANGED)
+        img = cv2.imdecode(np_data1,cv2.IMREAD_UNCHANGED)
+        img = cv2.resize(img, (800, 850))
         all_images_to_compare.append(img)
 
     UserIds=[]
@@ -50,21 +55,22 @@ def main (data,Category):
                 #print("Similarity: 100% (equal size and channels)")
                 break
         #2) Check for similarities between the 2 images
-        kp_2, desc_2 = sift.detectAndCompute(image_to_compare, None)
+        gray1 = cv2.cvtColor(image_to_compare,cv2.COLOR_BGR2GRAY)
+        kp_2, desc_2 = sift.detectAndCompute(gray1, None)
         matches = flann.knnMatch(desc_1, desc_2, k=2)
         good_points = []
         for m, n in matches:
-            if m.distance > 0.8 * n.distance:
+            if m.distance < 0.8 * n.distance:
                 good_points.append(m)
 
         number_keypoints = 0
-        if len(kp_1) >= len(kp_2):
+        if len(kp_1) <= len(kp_2):
             number_keypoints = len(kp_1)
         else:
             number_keypoints = len(kp_2)
         percentage_similarity = len(good_points) / number_keypoints * 100
 
-        if (int(percentage_similarity) > 0):
+        if (int(percentage_similarity) >= 0):
             UserIds.append(Ids[id] + "with" + str(int(percentage_similarity))+"with"+Image_IDS[id])
         id = id + 1
     return UserIds

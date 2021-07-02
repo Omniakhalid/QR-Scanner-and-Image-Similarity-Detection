@@ -30,12 +30,14 @@ import com.example.qr_scanner_and_image_similarity_detection.activities.CropImag
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
+import static android.provider.MediaStore.ACTION_IMAGE_CAPTURE;
+
 
 public class Upload_photo_Fragment extends Fragment {
 
 
     public static final String Key_CATEGORY="CAT";
-
+    Bitmap bitmap;
     ImageView Item_img;
     Spinner Categories_spiner;
     ListView Mylist;
@@ -57,8 +59,8 @@ public class Upload_photo_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-            //Intent CameraIntent = new Intent(ACTION_IMAGE_CAPTURE);
-            //startActivityForResult(CameraIntent, 1888);
+            Intent CameraIntent = new Intent(ACTION_IMAGE_CAPTURE);
+            startActivityForResult(CameraIntent, 1888);
 
 
         View view = inflater.inflate(R.layout.fragment_upload_photo_, container, false);
@@ -68,9 +70,6 @@ public class Upload_photo_Fragment extends Fragment {
         // adel work
         btn_crop = view.findViewById(R.id.btn_crop_image);
 
-
-
-
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.ItemCategories, android.R.layout.simple_spinner_dropdown_item);
         Categories_spiner.setAdapter(adapter);
         Categories_spiner.setPrompt("Select Category");
@@ -78,8 +77,6 @@ public class Upload_photo_Fragment extends Fragment {
         Mylist = view.findViewById(R.id.cutting_imgs_lst);
         customadapter = new CustomAdapter(getContext(),R.layout.cutimg_layout,Images_lst);
         Mylist.setAdapter(customadapter);
-
-
 
         btn_crop.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,20 +89,27 @@ public class Upload_photo_Fragment extends Fragment {
                     startActivity(cropActivity);
                     getActivity().finish();
 
-
+                }
+                else{
+                    ShowMessage("select category");
                 }
             }
         });
 
+
         Mylist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getContext(), FindOwner.class);
-                intent.putExtra("SelectedImage",Images_lst.get(position));
-                intent.putExtra("r","notcrop");
-                intent.putExtra("index",position);
-                startActivity(intent);
-
+                if(GetSelectedGategory()) {
+                    Intent intent = new Intent(getActivity().getApplicationContext(), FindOwner.class);
+                    intent.putExtra("SelectedImage", Images_lst.get(position));
+                    intent.putExtra("r", "notcrop");
+                    //intent.putExtra("index",position);
+                    intent.putExtra(Key_CATEGORY, category);
+                    startActivity(intent);
+                }else {
+                    ShowMessage("select category");
+                }
             }
         });
 
@@ -121,7 +125,6 @@ public class Upload_photo_Fragment extends Fragment {
         else {
             return true;
         }
-
     }
 
     private void ShowMessage(String s) {
@@ -133,7 +136,7 @@ public class Upload_photo_Fragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 1888 && resultCode == getActivity().RESULT_OK){
-            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+            bitmap = (Bitmap) data.getExtras().get("data");
             Item_img.setImageBitmap(bitmap);
 
             ConnectPython(bitmap);
@@ -200,8 +203,10 @@ public class Upload_photo_Fragment extends Fragment {
                 //  after.setImageBitmap(btm);
             }
         }
-        else
-            Toast.makeText(getContext(),"stop",Toast.LENGTH_LONG).show();
+        else{
+            Toast.makeText(getContext(),"Segment can't find many items",Toast.LENGTH_LONG).show();
+            Images_lst.add(bitmap);
+        }
     }
 
 
