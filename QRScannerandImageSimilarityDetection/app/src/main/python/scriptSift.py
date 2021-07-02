@@ -11,13 +11,13 @@ def main (data,Category):
     np_data = np.fromstring(decoded_data, np.uint8)
     original = cv2.imdecode(np_data, cv2.IMREAD_UNCHANGED)
     #gray = cv2.imread(original, 0)
-    gray= cv2.cvtColor(original,cv2.COLOR_BGR2GRAY)
-    gray = cv2.resize(gray, (800, 850))
+    gray1 = cv2.cvtColor(original,cv2.COLOR_BGR2GRAY)
+    gray1 = cv2.resize(gray1, (800, 850))
 
 
     # Sift and Flann
-    sift = cv2.SIFT_create(edgeThreshold =10, nfeatures = 5 , sigma = 1.6, contrastThreshold=0.04, nOctaveLayers=3)
-    kp_1, desc_1 = sift.detectAndCompute(gray, None)
+    sift = cv2.SIFT_create(sigma=1.6, contrastThreshold=0.04, edgeThreshold=10, nOctaveLayers=4, nfeatures=10)
+    kp_1, desc_1 = sift.detectAndCompute(gray1, None)
 
     index_params = dict(algorithm=0, trees=5)
     search_params = dict(check=50)
@@ -43,7 +43,7 @@ def main (data,Category):
 
     UserIds=[]
     id=0
-    for image_to_compare in all_images_to_compare:####we also need to extract titles  ,,,, use zip to get more arrays with
+    for image_to_compare in all_images_to_compare: ####we also need to extract titles  ,,,, use zip to get more arrays with
         # 1) Check if 2 images are equals
         if original.shape == image_to_compare.shape:
             #return "kp"
@@ -55,8 +55,8 @@ def main (data,Category):
                 #print("Similarity: 100% (equal size and channels)")
                 break
         #2) Check for similarities between the 2 images
-        gray1 = cv2.cvtColor(image_to_compare,cv2.COLOR_BGR2GRAY)
-        kp_2, desc_2 = sift.detectAndCompute(gray1, None)
+        gray2 = cv2.cvtColor(image_to_compare,cv2.COLOR_BGR2GRAY)
+        kp_2, desc_2 = sift.detectAndCompute(gray2, None)
         matches = flann.knnMatch(desc_1, desc_2, k=2)
         good_points = []
         for m, n in matches:
@@ -68,6 +68,7 @@ def main (data,Category):
             number_keypoints = len(kp_1)
         else:
             number_keypoints = len(kp_2)
+
         percentage_similarity = len(good_points) / number_keypoints * 100
 
         if (int(percentage_similarity) >= 0):

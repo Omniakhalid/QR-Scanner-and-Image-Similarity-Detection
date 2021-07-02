@@ -71,7 +71,7 @@ public class siftActivity extends AppCompatActivity {
         }
 
 
-        final Python py =Python.getInstance();
+        final Python py = Python.getInstance();
         String imageString=getImageString(bitmap);
         //pass imageString to python script
         final PyObject pyobj=py.getModule("scriptSift");
