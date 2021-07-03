@@ -133,7 +133,7 @@ public class EmergencyActivity extends AppCompatActivity {
                     String message = TextEmergency.getText().toString();
                     if (!message.isEmpty()) {
                         ShowMessage(USER_ID);
-                        String messag = message1.getText().toString() + "\n"+"my current location"+addresss;
+                        String messag = message1.getText().toString() + "\n"+"my current location:"+ "\n"+addresss;
                         if (!messag.equals("")) {
                             sendMessage(fuser.getUid(), USER_ID, messag);
                             //LatLng updated_location = new LatLng(location.getLatitude(),location.getLongitude());
