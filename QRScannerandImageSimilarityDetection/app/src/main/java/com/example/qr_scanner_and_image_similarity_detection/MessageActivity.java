@@ -113,8 +113,9 @@ public class MessageActivity extends AppCompatActivity {
 
                 User user = dataSnapshot.getValue(User.class);
                 //user.getname();
-                username.setText(user.getName());
-                profil_image.setImageResource(R.drawable.images);
+               // username.setText(user.getName());
+                username.setText("Owner");
+                profil_image.setImageResource(R.drawable.avatar);
 
                 readMessage(fuser.getUid(), usrerid);
             }
