@@ -155,7 +155,7 @@ public class FindOwner extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     String USER_ID= modelList.get(position).getUserId();
-                    sendMessage(fuser.getUid(), USER_ID, " ");
+                    sendMessage(fuser.getUid(), USER_ID, "Dear,\nI Found Your Lost Item");
                 }
             });
 
